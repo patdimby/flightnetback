@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qsTGUPCNGDjlAiygDMwiNNfLj6hU8fhM93FYTlKnYHjgEwMq4/0a/pK5cXZEJkPgGObQzwE7xJkGtSOg3epHYg==",
+  "dgSpecHash": "b18imtD25K2ixu89dWy+IUuIJU0zRTu4ryaXE9uWzwOe6GU7UUHxXgdRRHleGyQ4AMPBIfpNzbjeMSYi3/q63g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tolanchia\\Documents\\GitHub\\flightnetback\\Flight.Domain\\Flight.Domain.csproj",
+  "projectFilePath": "C:\\Users\\Tolanchia\\Documents\\GitHub\\flightnetback\\Core\\Flight.Domain\\Flight.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

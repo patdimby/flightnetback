@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tolanchia\\Documents\\GitHub\\flightnetback\\Flight.Domain\\Flight.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Tolanchia\\Documents\\GitHub\\flightnetback\\Core\\Flight.Domain\\Flight.Domain.csproj",
       "projectName": "Flight.Domain",
-      "projectPath": "C:\\Users\\Tolanchia\\Documents\\GitHub\\flightnetback\\Flight.Domain\\Flight.Domain.csproj",
+      "projectPath": "C:\\Users\\Tolanchia\\Documents\\GitHub\\flightnetback\\Core\\Flight.Domain\\Flight.Domain.csproj",
       "packagesPath": "C:\\Users\\Tolanchia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tolanchia\\Documents\\GitHub\\flightnetback\\Flight.Domain\\obj\\",
+      "outputPath": "C:\\Users\\Tolanchia\\Documents\\GitHub\\flightnetback\\Core\\Flight.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tolanchia\\AppData\\Roaming\\NuGet\\NuGet.Config",
