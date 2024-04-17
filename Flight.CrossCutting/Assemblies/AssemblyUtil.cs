@@ -1,28 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Flight.CrossCutting.Assemblies
+namespace Flight.CrossCutting.Assemblies;
+
+/// <summary>
+///     The assembly util.
+/// </summary>
+public static class AssemblyUtil
 {
     /// <summary>
-    /// The assembly util.
+    ///     Gets the current assemblies.
     /// </summary>
-    public static class AssemblyUtil
+    /// <returns>A list of Assemblies.</returns>
+    public static IEnumerable<Assembly> GetCurrentAssemblies()
     {
-        /// <summary>
-        /// Gets the current assemblies.
-        /// </summary>
-        /// <returns>A list of Assemblies.</returns>
-        public static IEnumerable<Assembly> GetCurrentAssemblies()
+        return new[]
         {
-            return new Assembly[]
-            {
-                Assembly.Load("Flight.Api"),
-                Assembly.Load("Flight.Application"),
-                Assembly.Load("Flight.Domain"),
-                Assembly.Load("Flight.Domain.Core"),
-                Assembly.Load("Flight.Infrastructure"),
-                Assembly.Load("Flight.CrossCutting")
-            };
-        }
+            Assembly.Load("Flight.Api"),
+            Assembly.Load("Flight.Application"),
+            Assembly.Load("Flight.Domain"),
+            Assembly.Load("Flight.Domain.Core"),
+            Assembly.Load("Flight.Infrastructure"),
+            Assembly.Load("Flight.CrossCutting")
+        };
     }
 }

@@ -1,34 +1,31 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Flight.Domain.Attributes
+namespace Flight.Domain.Core.Attributes;
+
+/// <summary>
+///     The date greater than attribute. Validate the date comparison
+/// </summary>
+public class UpdateGreaterThanCreateAttribute(string comparisonProperty) : ValidationAttribute
 {
+    private readonly string _comparisonProperty = comparisonProperty;
+
     /// <summary>
-    /// The date greater than attribute. Validate the date comparison
+    ///     Are the valid.
     /// </summary>
-    public class UpdateGreaterThanCreateAttribute(string comparisonProperty) : ValidationAttribute
+    /// <param name="value">The value.</param>
+    /// <param name="validationContext">The validation context.</param>
+    /// <returns>A ValidationResult.</returns>
+    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        private readonly string _comparisonProperty = comparisonProperty;
+        if (value == null) return ValidationResult.Success;
+        var currentValue = (DateTime)value;
 
-        /// <summary>
-        /// Are the valid.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="validationContext">The validation context.</param>
-        /// <returns>A ValidationResult.</returns>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            var currentValue = (DateTime)value;
+        var comparisonValue = (DateTime)validationContext.ObjectType.GetProperty(_comparisonProperty)
+            ?.GetValue(validationContext.ObjectInstance)!;
 
-            var comparisonValue = (DateTime)validationContext.ObjectType.GetProperty(_comparisonProperty)
-                                                                        .GetValue(validationContext.ObjectInstance);
-
-            if (currentValue < comparisonValue)
-            {
-                return new ValidationResult(ErrorMessage = "The update date must be later than start date");
-            }
-
-            return ValidationResult.Success;
-        }
+        return currentValue < comparisonValue
+            ? new ValidationResult(ErrorMessage = "The update date must be later than start date")
+            : ValidationResult.Success;
     }
 }

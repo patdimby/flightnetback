@@ -1,9 +1,8 @@
-﻿namespace Flight.Domain.Core.Models
+﻿namespace Flight.Domain.Core.Models;
+
+/// <summary>
+///     The response model.
+/// </summary>
+public class ResponseModel
 {
-    /// <summary>
-    /// The response model.
-    /// </summary>
-    public class ResponseModel
-    {
-    }
 }

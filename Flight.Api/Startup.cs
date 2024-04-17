@@ -8,81 +8,72 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Flight.Api
+namespace Flight.Api;
+
+/// <summary>
+///     The startup.
+/// </summary>
+public class Startup
 {
     /// <summary>
-    /// The startup.
+    ///     Initializes a new instance of the <see cref="Startup" /> class.
     /// </summary>
-    public class Startup
+    /// <param name="configuration">The configuration.</param>
+    public Startup(IConfiguration configuration)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Startup"/> class.
-        /// </summary>
-        /// <param name="configuration">The configuration.</param>
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        Configuration = configuration;
+    }
 
-        /// <summary>
-        /// Gets the configuration.
-        /// </summary>
-        public IConfiguration Configuration { get; }
+    /// <summary>
+    ///     Gets the configuration.
+    /// </summary>
+    public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        /// <summary>
-        /// Configures the services.
-        /// </summary>
-        /// <param name="services">The services.</param>
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<FlightContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString")));
+    // This method gets called by the runtime. Use this method to add services to the container.
+    /// <summary>
+    ///     Configures the services.
+    /// </summary>
+    /// <param name="services">The services.</param>
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddDbContext<FlightContext>(opt =>
+            opt.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString")));
 
-            services.AddControllers();
+        services.AddControllers();
 
-            //services.AddAutoMapper(AssemblyUtil.GetCurrentAssemblies());
+        //services.AddAutoMapper(AssemblyUtil.GetCurrentAssemblies());
 
-            //services.AddScoped<IVehicleApplication, VehicleApplication>();
+        //services.AddScoped<IVehicleApplication, VehicleApplication>();
 
-            //services.AddScoped<IRepository, VehicleRepository>();
+        //services.AddScoped<IRepository, VehicleRepository>();
 
-            services.AddSingleton(typeof(IMemoryCache), typeof(MemoryCache));
+        services.AddSingleton(typeof(IMemoryCache), typeof(MemoryCache));
 
-            services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+        services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 
-            services.AddSwaggerGen();
-        }
+        services.AddSwaggerGen();
+    }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        /// <summary>
-        /// Configures the.
-        /// </summary>
-        /// <param name="app">The app.</param>
-        /// <param name="env">The env.</param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseSwagger();
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    /// <summary>
+    ///     Configures the.
+    /// </summary>
+    /// <param name="app">The app.</param>
+    /// <param name="env">The env.</param>
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UseSwagger();
 
-            app.UseSwaggerUI(opt =>
-            {
-                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Flight.Api");
-            });
+        app.UseSwaggerUI(opt => { opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Flight.Api"); });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+        if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-            app.UseHttpsRedirection();
+        app.UseHttpsRedirection();
 
-            app.UseRouting();
+        app.UseRouting();
 
-            app.UseAuthorization();
+        app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }

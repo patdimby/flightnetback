@@ -1,20 +1,18 @@
 ﻿using AutoMapper;
 using Flight.Domain.Entities;
 
-namespace Flight.Application.Mapping
+namespace Flight.Application.Mapping;
+
+/// <summary>
+///     The vehicle map.
+/// </summary>
+public class Map : Profile
 {
     /// <summary>
-    /// The vehicle map.
+    ///     Initializes a new instance of the <see cref="Map" /> class.
     /// </summary>
-    public class Map : Profile
+    public Map()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Map"/> class.
-        /// </summary>
-        public Map()
-        {
-            CreateMap<Vehicle, VehicleRecord>();
-           
-        }
+        CreateMap<Vehicle, VehicleRecord>();
     }
 }

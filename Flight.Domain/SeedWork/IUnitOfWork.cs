@@ -1,44 +1,43 @@
-﻿using Flight.Domain.Interfaces;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Flight.Domain.Interfaces;
 
-namespace Flight.Domain.SeedWork
+namespace Flight.Domain.SeedWork;
+
+/// <summary>
+///     The unit of work.
+/// </summary>
+public interface IUnitOfWork : IDisposable
 {
     /// <summary>
-    /// The unit of work.
+    ///     repositories the.
     /// </summary>
-    public interface IUnitOfWork : IDisposable
-    {
-        /// <summary>
-        /// repositories the.
-        /// </summary>
-        /// <returns>An IGenericRepository.</returns>
-        IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
+    /// <returns>An IGenericRepository.</returns>
+    IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
 
-        /// <summary>
-        /// Start a new transaction.
-        /// </summary>
-        void BeginTransaction();
+    /// <summary>
+    ///     Start a new transaction.
+    /// </summary>
+    void BeginTransaction();
 
-        /// <summary>
-        /// Save changes to our database.
-        /// </summary>
-        void Commit();
+    /// <summary>
+    ///     Save changes to our database.
+    /// </summary>
+    void Commit();
 
-        /// <summary>
-        /// Rollback the database Transaction
-        /// </summary>
-        void Rollback();
+    /// <summary>
+    ///     Rollback the database Transaction
+    /// </summary>
+    void Rollback();
 
-        /// <summary>
-        /// DbContext Class SaveChanges method
-        /// </summary>
-        void Save();
+    /// <summary>
+    ///     DbContext Class SaveChanges method
+    /// </summary>
+    void Save();
 
-        /// <summary>
-        /// Save changes asynchronously to our database.
-        /// </summary>
-        /// <returns>A Task.</returns>
-        Task<int> CommitAsync();
-    }
+    /// <summary>
+    ///     Save changes asynchronously to our database.
+    /// </summary>
+    /// <returns>A Task.</returns>
+    Task<int> CommitAsync();
 }

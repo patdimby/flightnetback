@@ -1,17 +1,16 @@
-﻿namespace Flight.Domain.Core.Interfaces
+﻿namespace Flight.Domain.Core.Interfaces;
+
+/// <summary>
+///     The delete entity.
+/// </summary>
+public interface IDeleteEntity
 {
     /// <summary>
-    /// The delete entity.
+    ///     Gets or sets a value indicating whether is deleted.
     /// </summary>
-    public interface IDeleteEntity
-    {
-        /// <summary>
-        /// Gets or sets a value indicating whether is deleted.
-        /// </summary>
-        bool IsDeleted { get; set; }
-    }
+    bool IsDeleted { get; set; }
+}
 
-    public interface IDeleteEntity<TKey> : IDeleteEntity, IEntityBase<TKey>
-    {
-    }
+public interface IDeleteEntity<TKey> : IDeleteEntity, IEntityBase<TKey>
+{
 }

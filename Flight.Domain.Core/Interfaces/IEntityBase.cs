@@ -1,7 +1,6 @@
-﻿namespace Flight.Domain.Core.Interfaces
+﻿namespace Flight.Domain.Core.Interfaces;
+
+public interface IEntityBase<TKey>
 {
-    public interface IEntityBase<TKey>
-    {
-        TKey Id { get; set; }
-    }
+    TKey Id { get; set; }
 }

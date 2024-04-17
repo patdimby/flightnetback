@@ -1,61 +1,63 @@
-﻿using Flight.Domain.Core.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Flight.Domain.Core.Abstracts;
 using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Flight.Domain.Models
+namespace Flight.Domain.Entities;
+
+/// <summary>
+///     The flight type.
+/// </summary>
+public enum Type
+{
+    BusinessClass,
+    Economy
+}
+
+/// <summary>
+///     The state.
+/// </summary>
+public enum State
+{
+    Pending,
+    Confirmed,
+    Cancelled
+}
+
+/// <summary>
+///     The reservation.
+/// </summary>
+[Table("Reservations")]
+public class Reservation : DeleteEntity<int>
 {
     /// <summary>
-    /// The flight type.
+    ///     Gets or sets the reservation.
     /// </summary>
-    public enum Type
-    {
-        BusinessClass, Economy
-    }
+    public Reservation reservation { get; set; } = new();
 
     /// <summary>
-    /// The state.
+    ///     Gets or sets the flight type.
     /// </summary>
-    public enum State
-    {
-        Pending, Confirmed, Cancelled
-    }
+    [Column("flight_type")]
+    [JsonProperty(PropertyName = "flight_type")]
+    public Type FlightType { get; set; } = Type.Economy;
 
     /// <summary>
-    /// The reservation.
+    ///     Gets or sets the flight id.
     /// </summary>
-    [Table("Reservations")]
-    public partial class Reservation : DeleteEntity<int>
-    {
-        /// <summary>
-        /// Gets or sets the reservation.
-        /// </summary>
-        public Reservation reservation { get; set; } = new();
+    [Column("flight_id")]
+    [JsonProperty(PropertyName = "flight_id")]
+    public int FlightId { get; set; }
 
-        /// <summary>
-        /// Gets or sets the flight type.
-        /// </summary>
-        [Column(name: "flight_type")]
-        [JsonProperty(PropertyName = "flight_type")]
-        public Type FlightType { get; set; } = Type.Economy;
+    /// <summary>
+    ///     Gets or sets the plane.
+    /// </summary>
+    [ForeignKey(nameof(FlightId))]
+    public virtual Flight Plane { get; set; }
 
-        /// <summary>
-        /// Gets or sets the flight id.
-        /// </summary>
-        [Column(name: "flight_id")]
-        [JsonProperty(PropertyName = "flight_id")]
-        public int FlightId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the plane.
-        /// </summary>
-        [ForeignKey(nameof(FlightId))]
-        public virtual Flight Plane { get; set; }
-
-        /// <summary>
-        /// Gets or sets the state.
-        /// </summary>
-        [Column(name: "state")]
-        [JsonProperty(PropertyName = "state")]
-        public State state { get; set; }
-    }
+    /// <summary>
+    ///     Gets or sets the state.
+    /// </summary>
+    [Column("state")]
+    [JsonProperty(PropertyName = "state")]
+    public State state { get; set; }
 }
