@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Skinet.Core.Specifications
+namespace Flight.Domain.Core.Specifications
 {
     /// <summary>
     /// The base specification.

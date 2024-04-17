@@ -58,7 +58,7 @@ namespace Flight.Infrastructure.Data
         /// <returns>An IGenericRepository.</returns>
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
-            if (_repositories == null) _repositories = new Hashtable();
+            _repositories ??= new Hashtable();
             var Type = typeof(TEntity).Name;
             if (!_repositories.ContainsKey(Type))
             {
@@ -70,11 +70,17 @@ namespace Flight.Infrastructure.Data
             return (IGenericRepository<TEntity>)_repositories[Type];
         }
 
+        /// <summary>
+        /// Rollbacks the.
+        /// </summary>
         public void Rollback()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Saves the.
+        /// </summary>
         public void Save()
         {
             try

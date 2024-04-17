@@ -1,4 +1,5 @@
 ﻿using Flight.Domain.Core.Entities;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Flight.Domain.Models
@@ -22,7 +23,7 @@ namespace Flight.Domain.Models
     /// <summary>
     /// The reservation.
     /// </summary>
-    [Table("Reservation")]
+    [Table("Reservations")]
     public partial class Reservation : DeleteEntity<int>
     {
         /// <summary>
@@ -33,12 +34,16 @@ namespace Flight.Domain.Models
         /// <summary>
         /// Gets or sets the flight type.
         /// </summary>
+        [Column(name: "flight_type")]
+        [JsonProperty(PropertyName = "flight_type")]
         public Type FlightType { get; set; } = Type.Economy;
 
         /// <summary>
         /// Gets or sets the flight id.
         /// </summary>
-        public short FlightId { get; set; }
+        [Column(name: "flight_id")]
+        [JsonProperty(PropertyName = "flight_id")]
+        public int FlightId { get; set; }
 
         /// <summary>
         /// Gets or sets the plane.
@@ -49,6 +54,8 @@ namespace Flight.Domain.Models
         /// <summary>
         /// Gets or sets the state.
         /// </summary>
+        [Column(name: "state")]
+        [JsonProperty(PropertyName = "state")]
         public State state { get; set; }
     }
 }

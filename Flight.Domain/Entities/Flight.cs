@@ -1,4 +1,5 @@
 ﻿using Flight.Domain.Core.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ namespace Flight.Domain.Models
     /// <summary>
     /// The flight.
     /// </summary>
-    [Table("Flight")]
+    [Table("Flights")]
     public partial class Flight : DeleteEntity<int>
     {
         /// <summary>
@@ -17,7 +18,7 @@ namespace Flight.Domain.Models
         /// </summary>
         public Flight()
         {
-            Reservations = new HashSet<Reservation>();
+            Reservations = [];
         }
 
         /// <summary>
@@ -25,38 +26,52 @@ namespace Flight.Domain.Models
         /// </summary>
         [Required(ErrorMessage = "Flight code is a required field.")]
         [MaxLength(30, ErrorMessage = "Maximum length for the Code is 30 characters.")]
-        public string Code { get; set; }
+        [Column("code")]
+        [JsonProperty(PropertyName = "code")]
+        public string Code { get; set; } = "";
 
         /// <summary>
         /// Gets or sets the departure.
         /// </summary>
         [Required(ErrorMessage = "Date of departure is a required field.")]
+        [Column("departure")]
+        [JsonProperty(PropertyName = "departure")]
         public DateTime Departure { get; set; }
 
         /// <summary>
         /// Gets or sets the estimated arrival.
         /// </summary>
         [Required(ErrorMessage = "Date of arrival is a required field.")]
+        [Column("arrival")]
+        [JsonProperty(PropertyName = "arrival")]
         public DateTime EstimatedArrival { get; set; }
 
         /// <summary>
         /// Gets or sets the business class slots.
         /// </summary>
+        [Column(name: "bus_slot")]
+        [JsonProperty(PropertyName = "bus_slot")]
         public int BusinessClassSlots { get; set; }
 
         /// <summary>
         /// Gets or sets the economy slots.
         /// </summary>
+        [Column(name: "eco_slot")]
+        [JsonProperty(PropertyName = "eco_slot")]
         public int EconomySlots { get; set; }
 
         /// <summary>
         /// Gets or sets the business class price.
         /// </summary>
+        [Column(name: "bus_price")]
+        [JsonProperty(PropertyName = "bus_price")]
         public float BusinessClassPrice { get; set; }
 
         /// <summary>
         /// Gets or sets the economy price.
         /// </summary>
+        [Column(name: "eco_price")]
+        [JsonProperty(PropertyName = "eco_price")]
         public float EconomyPrice { get; set; }
 
         /// <summary>
@@ -67,6 +82,8 @@ namespace Flight.Domain.Models
         /// <summary>
         /// Identification of destination airport.
         /// </summary>
+        [Column(name: "flight_to")]
+        [JsonProperty(PropertyName = "flight_to")]
         public int To { get; set; }
 
         /// <summary>
@@ -78,6 +95,8 @@ namespace Flight.Domain.Models
         /// <summary>
         /// Identification of departure airport.
         /// </summary>
+        [Column(name: "flight_from")]
+        [JsonProperty(PropertyName = "flight_from")]
         public int From { get; set; }
 
         /// <summary>

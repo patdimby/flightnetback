@@ -12,7 +12,7 @@ namespace Flight.Infrastructure.Context
     /// <summary>
     /// The flight context.
     /// </summary>
-    public class FlightContext(DbContextOptions<FlightContext> options) : DbContext(options)
+    public class FlightContext : DbContext
     {
         /// <summary>
         /// Gets or sets the airline.
@@ -43,6 +43,16 @@ namespace Flight.Infrastructure.Context
         /// Gets or sets the vehicle.
         /// </summary>
         public DbSet<Vehicle> Vehicle { get; set; }
+
+        /// <summary>
+        /// Ons the configuring.
+        /// </summary>
+        /// <param name="optionsBuilder">The options builder.</param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var connString = "server=127.0.0.1;port=3306;user=root;password=Ma$terkey1;database=flights";
+            optionsBuilder.UseMySql(connString, ServerVersion.AutoDetect(connString));
+        }
 
         /// <summary>
         /// Begins the transaction.
