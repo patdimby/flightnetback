@@ -10,7 +10,7 @@ public record VehicleRecord(int Id, string LicensePlate, string Manufacturer, st
 ///     The vehicle.
 /// </summary>
 [Table("Vehicles")]
-public class Vehicle : BaseEntity
+public class Vehicle : DeleteEntity<int>
 {
     /// <summary>
     ///     Gets or sets the license plate.

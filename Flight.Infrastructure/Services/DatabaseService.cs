@@ -1,4 +1,4 @@
-﻿using Flight.Infrastructure.Context;
+﻿using Flight.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

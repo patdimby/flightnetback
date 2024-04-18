@@ -3,7 +3,6 @@ using System.Collections;
 using System.Threading.Tasks;
 using Flight.Domain.Interfaces;
 using Flight.Domain.SeedWork;
-using Flight.Infrastructure.Context;
 using Flight.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 

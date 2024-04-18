@@ -6,7 +6,7 @@ using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Flight.Infrastructure.Context;
+namespace Flight.Infrastructure.Data;
 
 /// <summary>
 ///     The flight context.

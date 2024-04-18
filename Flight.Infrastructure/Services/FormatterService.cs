@@ -8,7 +8,7 @@ namespace Flight.Infrastructure.Services;
 /// <summary>
 ///     The json service.
 /// </summary>
-public static class JsonService
+public static class FormatterService
 {
     /// <summary>
     ///     Adds the json formatter.

@@ -23,17 +23,14 @@ public enum State
     Cancelled
 }
 
+public record ReservationRecord(int Id, Type FlightType, int FlightId, Flight Plane, State state);
+
 /// <summary>
 ///     The reservation.
 /// </summary>
 [Table("Reservations")]
 public class Reservation : DeleteEntity<int>
 {
-    /// <summary>
-    ///     Gets or sets the reservation.
-    /// </summary>
-    public Reservation reservation { get; set; } = new();
-
     /// <summary>
     ///     Gets or sets the flight type.
     /// </summary>
@@ -52,7 +49,7 @@ public class Reservation : DeleteEntity<int>
     ///     Gets or sets the plane.
     /// </summary>
     [ForeignKey(nameof(FlightId))]
-    public virtual Flight Plane { get; set; }
+    public Flight Plane { get; set; }
 
     /// <summary>
     ///     Gets or sets the state.

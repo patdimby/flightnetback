@@ -14,5 +14,10 @@ public class Map : Profile
     public Map()
     {
         CreateMap<Vehicle, VehicleRecord>();
+        CreateMap<Airline, AirlineRecord>();
+        CreateMap<Airport, AirportRecord>();
+        CreateMap<Domain.Entities.Flight, VehicleRecord>();
+        CreateMap<Reservation, ReservationRecord>();
+        CreateMap<Passenger, PassengerRecord>();
     }
 }

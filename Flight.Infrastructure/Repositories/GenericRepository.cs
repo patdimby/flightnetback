@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Flight.Domain.Core.Abstracts;
 using Flight.Domain.Interfaces;
-using Flight.Infrastructure.Context;
+using Flight.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Flight.Infrastructure.Repositories;
@@ -14,7 +15,11 @@ namespace Flight.Infrastructure.Repositories;
 /// </summary>
 public abstract class GenericRepository<T>(FlightContext context) : IGenericRepository<T> where T : class
 {
+    //The following variable is going to hold the FlightContext instance
     protected readonly FlightContext Context = context;
+
+    //The following Variable is going to hold the DbSet Entity
+    private DbSet<T> table = null;
 
     /// <summary>
     ///     Adds the async.
@@ -84,9 +89,16 @@ public abstract class GenericRepository<T>(FlightContext context) : IGenericRepo
     /// </summary>
     /// <param name="id">The id.</param>
     /// <returns>A Task.</returns>
-    public Task<int> DeleteAsync(int id)
+    public async Task<int> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var item = await Context.Set<T>().FindAsync(id);
+        if (item is not null)
+        {
+            Context.Set<T>().Remove(item);
+            return await Save();
+        }
+
+        return 0;
     }
 
     /// <summary>
@@ -178,10 +190,10 @@ public abstract class GenericRepository<T>(FlightContext context) : IGenericRepo
     }
 
     /// <summary>
-    ///     Updates the.
-    /// </summary>
-    /// <param name="entity">The entity.</param>
-    /// <returns>A Task.</returns>
+    ///     This method is going to update the record in the table
+    ///     It will receive the object as an argument
+    ///     <param name="entity">The entity.</param>
+    ///     <returns>A Task.</returns>
     public async Task<int> Update(T entity)
     {
         try
@@ -193,5 +205,40 @@ public abstract class GenericRepository<T>(FlightContext context) : IGenericRepo
         {
             return 0;
         }
+    }
+
+    /// <summary>
+    ///     Selects the all async.
+    /// </summary>
+    /// <returns>A Task.</returns>
+    public async Task<IEnumerable<T>> SelectAllAsync()
+    {
+        IEnumerable<T> wfList = null;
+
+        await Task.Run(() => { wfList = Context.Set<T>(); });
+
+        return wfList;
+    }
+
+    /// <summary>
+    ///     Updates the async.
+    /// </summary>
+    /// <param name="entity">The entity.</param>
+    /// <returns>A Task.</returns>
+    public async Task<int> UpdateAsync(BaseEntity entity)
+    {
+        var old = await GetByIdAsync(entity.Id);
+        if (old is not null)
+            try
+            {
+                Context.Entry(old).CurrentValues.SetValues(entity);
+                return await Context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        return 0;
     }
 }

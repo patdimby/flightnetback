@@ -15,6 +15,8 @@ public enum Genre
     Unknown
 }
 
+public record PassengerRecord();
+
 /// <summary>
 ///     The passenger.
 /// </summary>
