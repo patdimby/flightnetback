@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Flight.Domain.Core.Abstracts;
+﻿using Flight.Domain.Core.Abstracts;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Flight.Domain.Entities;
 
@@ -29,7 +29,7 @@ public record BookingRecord(int Id, Type FlightType, int FlightId, Flight Plane,
 ///     The reservation.
 /// </summary>
 [Table("Bookings")]
-public class Booking: DeleteEntity<int>
+public class Booking : DeleteEntity<int>
 {
     /// <summary>
     ///     Gets or sets the flight type.

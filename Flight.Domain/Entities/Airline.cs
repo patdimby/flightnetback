@@ -25,7 +25,7 @@ public class Airline : DeleteEntity<int>
     /// <summary>
     ///     Gets or sets the name.
     /// </summary>
-    [Required(ErrorMessage = "Employee name is a required field.")]
+    [Required(ErrorMessage = "Airline name is a required field.")]
     [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
     [Column("name")]
     [JsonProperty(PropertyName = "name")]

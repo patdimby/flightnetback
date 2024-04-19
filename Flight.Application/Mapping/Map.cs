@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Flight.Domain;
 using Flight.Domain.Entities;
 
 namespace Flight.Application.Mapping;
@@ -13,6 +14,8 @@ public class Map : Profile
     /// </summary>
     public Map()
     {
+        CreateMap<City, CityRecord>();
+        CreateMap<Country, CountryRecord>();
         CreateMap<Vehicle, VehicleRecord>();
         CreateMap<Airline, AirlineRecord>();
         CreateMap<Airport, AirportRecord>();

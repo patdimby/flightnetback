@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Flight.Domain;
 using Flight.Domain.Entities;
 using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,14 @@ public class FlightContext : DbContext
     ///     Gets or sets the vehicle.
     /// </summary>
     public DbSet<Vehicle> Vehicle { get; set; }
+    /// <summary>
+    /// Gets or sets the country.
+    /// </summary>
+    public DbSet<Country> Country { get; set; }
+    /// <summary>
+    /// Gets or sets the city.
+    /// </summary>
+    public DbSet<City> City { get; set; }
 
     /// <summary>
     ///     Ons the configuring.
