@@ -9,27 +9,27 @@ namespace Flight.Domain.Entities;
 /// </summary>
 public enum Type
 {
-    BusinessClass,
+    Business,
     Economy
 }
 
 /// <summary>
 ///     The state.
 /// </summary>
-public enum State
+public enum Status
 {
     Pending,
     Confirmed,
     Cancelled
 }
 
-public record ReservationRecord(int Id, Type FlightType, int FlightId, Flight Plane, State state);
+public record BookingRecord(int Id, Type FlightType, int FlightId, Flight Plane, State state);
 
 /// <summary>
 ///     The reservation.
 /// </summary>
-[Table("Reservations")]
-public class Reservation : DeleteEntity<int>
+[Table("Bookings")]
+public class Booking: DeleteEntity<int>
 {
     /// <summary>
     ///     Gets or sets the flight type.
@@ -56,5 +56,5 @@ public class Reservation : DeleteEntity<int>
     /// </summary>
     [Column("state")]
     [JsonProperty(PropertyName = "state")]
-    public State state { get; set; }
+    public Status state { get; set; }
 }

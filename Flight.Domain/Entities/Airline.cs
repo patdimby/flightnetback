@@ -8,7 +8,7 @@ namespace Flight.Domain.Entities;
 /// <summary>
 ///     The status.
 /// </summary>
-public enum Status
+public enum State
 {
     Active,
     Inactive
@@ -36,8 +36,8 @@ public class Airline : DeleteEntity<int>
     /// </summary>
     [Required(ErrorMessage = "State must be given.")]
     [Column("state")]
-    [JsonProperty(PropertyName = "name")]
-    public Status Statut { get; set; } = Status.Active;
+    [JsonProperty(PropertyName = "state")]
+    public State Statut { get; set; } = State.Active;
 
     /// <summary>
     ///     Gets or sets the deleted flag.

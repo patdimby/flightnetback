@@ -18,7 +18,7 @@ public class Flight : DeleteEntity<int>
     /// </summary>
     public Flight()
     {
-        Reservations = [];
+        Bookings = [];
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ public class Flight : DeleteEntity<int>
     /// <summary>
     ///     Gets or sets the reservations.
     /// </summary>
-    public virtual ICollection<Reservation> Reservations { get; set; }
+    public virtual ICollection<Booking> Bookings { get; set; }
 
     /// <summary>
     ///     Identification of destination airport.

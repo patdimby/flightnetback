@@ -26,8 +26,8 @@ public class Airport : DeleteEntity<int>
     ///     Gets or sets the status.
     /// </summary>
     [Column("state")]
-    [JsonProperty(PropertyName = "statut")]
-    public Status Statut { get; set; } = Status.Active;
+    [JsonProperty(PropertyName = "state")]
+    public State Statut { get; set; } = State.Active;
 
     /// <summary>
     ///     Gets or sets the deleted flag.

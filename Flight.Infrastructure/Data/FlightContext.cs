@@ -36,7 +36,7 @@ public class FlightContext : DbContext
     /// <summary>
     ///     Gets or sets the reservation.
     /// </summary>
-    public DbSet<Reservation> Reservation { get; init; }
+    public DbSet<Booking> Booking { get; init; }
 
     /// <summary>
     ///     Gets or sets the vehicle.
