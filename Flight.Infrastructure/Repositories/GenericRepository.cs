@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Flight.Domain.Core.Abstracts;
 using Flight.Domain.Interfaces;
 using Flight.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -13,13 +12,22 @@ namespace Flight.Infrastructure.Repositories;
 /// <summary>
 ///     The generic repository.
 /// </summary>
-public abstract class GenericRepository<T>(FlightContext context) : IGenericRepository<T> where T : class
+public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    //The following variable is going to hold the FlightContext instance
-    protected readonly FlightContext Context = context;
-
     //The following Variable is going to hold the DbSet Entity
     private DbSet<T> table = null;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="GenericRepository" /> class.
+    /// </summary>
+    /// <param name="context">The context.</param>
+    public GenericRepository(FlightContext context)
+    {
+        Context = context;
+    }
+
+    //The following variable is going to hold the FlightContext instance
+    protected FlightContext Context { get; set; }
 
     /// <summary>
     ///     Adds the async.
@@ -220,25 +228,16 @@ public abstract class GenericRepository<T>(FlightContext context) : IGenericRepo
         return wfList;
     }
 
-    /// <summary>
-    ///     Updates the async.
-    /// </summary>
-    /// <param name="entity">The entity.</param>
-    /// <returns>A Task.</returns>
-    public async Task<int> UpdateAsync(BaseEntity entity)
+    public async Task<int> UpdateAsync(T old, T entity)
     {
-        var old = await GetByIdAsync(entity.Id);
-        if (old is not null)
-            try
-            {
-                Context.Entry(old).CurrentValues.SetValues(entity);
-                return await Context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
-
-        return 0;
+        try
+        {
+            Context.Entry(old).CurrentValues.SetValues(entity);
+            return await Context.SaveChangesAsync();
+        }
+        catch (Exception)
+        {
+            return 0;
+        }
     }
 }

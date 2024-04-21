@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Flight.Domain;
 using Flight.Domain.Entities;
 
 namespace Flight.Application.Mapping;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Flight.Domain.Core.Abstracts;
 
 namespace Flight.Domain.Interfaces;
 
@@ -141,10 +140,5 @@ public interface IGenericRepository<T> where T : class
     /// <returns>A Task.</returns>
     Task<IEnumerable<T>> SelectAllAsync();
 
-    /// <summary>
-    ///     Updates the async.
-    /// </summary>
-    /// <param name="entity">The entity.</param>
-    /// <returns>A Task.</returns>
-    Task<int> UpdateAsync(BaseEntity entity);
+    Task<int> UpdateAsync(T old, T entity);
 }

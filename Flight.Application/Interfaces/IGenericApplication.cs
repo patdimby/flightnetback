@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flight.Application.Results;
+using Flight.Domain.Core.Abstracts;
 
 namespace Flight.Application.Interfaces;
 
 /// <summary>
 ///     The generic application.
 /// </summary>
-public interface IGenericApplication<T> where T : class
+public interface IGenericApplication<T> where T : DeleteEntity<int>
 {
     /// <summary>
     ///     Gets the async.
