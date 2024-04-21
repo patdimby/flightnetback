@@ -1,5 +1,4 @@
-﻿using Flight.Application.Interfaces;
-using Flight.Domain.Core.Abstracts;
+﻿using Flight.Application.Applications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flight.Api.Controllers;
@@ -11,5 +10,5 @@ namespace Flight.Api.Controllers;
 [ApiController]
 public class ParentController : ControllerBase
 {
-    protected IGenericApplication<DeleteEntity<int>> _baseApplication;
+    protected BaseApplication _application;
 }

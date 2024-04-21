@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Flight.Domain.Core.Interfaces;
+﻿using Flight.Domain.Core.Interfaces;
 using Flunt.Notifications;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Flight.Domain.Core.Abstracts;
 

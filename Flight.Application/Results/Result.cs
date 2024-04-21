@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Flunt.Notifications;
+using System.Collections.Generic;
 using System.Linq;
-using Flunt.Notifications;
 
 namespace Flight.Application.Results;
 

@@ -7,16 +7,13 @@ using Flight.Domain.Interfaces;
 using Flight.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Flight.Infrastructure.Repositories;
+namespace Flight.Infrastructure.Contracts;
 
 /// <summary>
 ///     The generic repository.
 /// </summary>
 public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    //The following Variable is going to hold the DbSet Entity
-    private DbSet<T> table = null;
-
     /// <summary>
     ///     Initializes a new instance of the <see cref="GenericRepository" /> class.
     /// </summary>
@@ -27,6 +24,9 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
     }
 
     //The following variable is going to hold the FlightContext instance
+    /// <summary>
+    /// Gets or sets the context.
+    /// </summary>
     protected FlightContext Context { get; set; }
 
     /// <summary>
@@ -100,24 +100,25 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
     public async Task<int> DeleteAsync(int id)
     {
         var item = await Context.Set<T>().FindAsync(id);
-        if (item is not null)
-        {
-            Context.Set<T>().Remove(item);
-            return await Save();
-        }
-
-        return 0;
+        if (item is null) return 0;
+        Context.Set<T>().Remove(item);
+        return await Save();
     }
 
     /// <summary>
     ///     Gets the.
     /// </summary>
     /// <param name="expression">The expression.</param>
+    /// <param name="trackChanges"></param>
     /// <returns>An IQueryable.</returns>
-    public IQueryable<T> Get(Expression<Func<T, bool>> expression)
-    {
-        throw new NotImplementedException();
-    }
+    public IQueryable<T> Get(Expression<Func<T, bool>> expression, bool trackChanges)
+        =>
+            !trackChanges
+                ? Context.Set<T>()
+                    .Where(expression)
+                    .AsNoTracking()
+                : Context.Set<T>()
+                    .Where(expression);
 
     /// <summary>
     ///     Gets the by id async.
@@ -228,6 +229,12 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
         return wfList;
     }
 
+    /// <summary>
+    /// Updates the async.
+    /// </summary>
+    /// <param name="old">The old.</param>
+    /// <param name="entity">The entity.</param>
+    /// <returns>A Task.</returns>
     public async Task<int> UpdateAsync(T old, T entity)
     {
         try
@@ -240,4 +247,10 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
             return 0;
         }
     }
+
+    public IQueryable<T> FindAll(bool trackChanges) =>
+        !trackChanges
+            ? Context.Set<T>()
+                .AsNoTracking()
+            : Context.Set<T>();
 }

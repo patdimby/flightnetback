@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Flight.Application.Results;
+﻿using Flight.Application.Results;
 using Flight.Domain.Core.Abstracts;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Flight.Application.Interfaces;
 

@@ -1,8 +1,11 @@
-﻿using System;
-using Flight.Domain.Core.Attributes;
+﻿using Flight.Domain.Core.Attributes;
 using Flight.Domain.Core.Interfaces;
+using System;
 
 namespace Flight.Domain.Core.Abstracts;
+/// <summary>
+/// The audit entity.
+/// </summary>
 
 public abstract class AuditEntity<TKey> : DeleteEntity<TKey>, IAuditEntity<TKey>
 {

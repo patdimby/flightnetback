@@ -14,14 +14,14 @@ public static class AssemblyUtil
     /// <returns>A list of Assemblies.</returns>
     public static IEnumerable<Assembly> GetCurrentAssemblies()
     {
-        return new[]
-        {
+        return
+        [
             Assembly.Load("Flight.Api"),
             Assembly.Load("Flight.Application"),
             Assembly.Load("Flight.Domain"),
             Assembly.Load("Flight.Domain.Core"),
             Assembly.Load("Flight.Infrastructure"),
             Assembly.Load("Flight.CrossCutting")
-        };
+        ];
     }
 }

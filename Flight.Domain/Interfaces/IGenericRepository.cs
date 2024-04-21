@@ -56,7 +56,7 @@ public interface IGenericRepository<T> where T : class
     /// </summary>
     /// <param name="expression">The expression.</param>
     /// <returns>An IQueryable.</returns>
-    IQueryable<T> Get(Expression<Func<T, bool>> expression);
+    IQueryable<T> Get(Expression<Func<T, bool>> expression, bool trackChanges);
 
     /// <summary>
     ///     Gets a generic T by id.
@@ -140,5 +140,12 @@ public interface IGenericRepository<T> where T : class
     /// <returns>A Task.</returns>
     Task<IEnumerable<T>> SelectAllAsync();
 
+    /// <summary>
+    /// Updates the async.
+    /// </summary>
+    /// <param name="old">The old.</param>
+    /// <param name="entity">The entity.</param>
+    /// <returns>A Task.</returns>
     Task<int> UpdateAsync(T old, T entity);
+    IQueryable<T> FindAll(bool trackChanges);
 }

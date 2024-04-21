@@ -11,11 +11,7 @@ namespace Flight.Api.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class CityController : ControllerBase
+public class CityController(IMapper mapper, IGenericRepository<City> repository) : ControllerBase
 {
-    public GenericApplication _baseApplication;
-
-    public CityController(IMapper mapper, IGenericRepository<City> repository)
-    {
-    }
+    public BaseApplication _baseApplication = new(mapper, repository);
 }

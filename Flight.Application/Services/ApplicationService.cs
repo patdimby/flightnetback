@@ -13,6 +13,6 @@ public static class ApplicationService
     /// <param name="services">The services.</param>
     public static void AddApplications(this IServiceCollection services)
     {
-        //services.AddScoped<IGenericApplication, GenericApplication>();
+        //services.AddScoped<IGenericApplication, CityApplication>();
     }
 }

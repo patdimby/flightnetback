@@ -42,5 +42,5 @@ public interface ISpecifications<T>
     /// <summary>
     ///     Gets a value indicating whether paging is enabled.
     /// </summary>
-    bool isPagingEnabled { get; }
+    bool IsPagingEnabled { get; }
 }

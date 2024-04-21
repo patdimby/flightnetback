@@ -5,6 +5,9 @@
 /// </summary>
 public static class Constants
 {
+    /// <summary>
+    /// The routs.
+    /// </summary>
     public static class Routs
     {
         /// <summary>
@@ -18,6 +21,9 @@ public static class Constants
     /// </summary>
     public static class ReturnMessages
     {
+        /// <summary>
+        /// The not found.
+        /// </summary>
         public const string NotFound = "No record found";
     }
 }

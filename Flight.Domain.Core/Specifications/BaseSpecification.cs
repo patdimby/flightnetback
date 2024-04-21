@@ -34,7 +34,7 @@ public class BaseSpecification<T> : ISpecifications<T>
     ///     Gets the includes.
     /// </summary>
     public List<Expression<Func<T, object>>> Includes { get; }
-        = new();
+        = [];
 
     /// <summary>
     ///     Gets the order by.
@@ -59,7 +59,7 @@ public class BaseSpecification<T> : ISpecifications<T>
     /// <summary>
     ///     Gets a value indicating whether paging is enabled.
     /// </summary>
-    public bool isPagingEnabled { get; private set; }
+    public bool IsPagingEnabled { get; private set; }
 
     /// <summary>
     ///     Adds the include.
@@ -97,6 +97,6 @@ public class BaseSpecification<T> : ISpecifications<T>
     {
         Take = take;
         //Skip = skip;
-        isPagingEnabled = true;
+        IsPagingEnabled = true;
     }
 }
