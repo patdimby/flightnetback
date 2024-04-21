@@ -1,6 +1,6 @@
-﻿using Flight.Domain.Interfaces;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Flight.Domain.Interfaces;
 
 namespace Flight.Domain.SeedWork;
 

@@ -1,14 +1,14 @@
-﻿using Flight.Domain.Core.Interfaces;
-using Flunt.Notifications;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Flight.Domain.Core.Interfaces;
+using Flunt.Notifications;
 
 namespace Flight.Domain.Core.Abstracts;
 
 /// <summary>
 ///     The entity base.
 /// </summary>
-public abstract class EntityBase<TKey> : IEntityBase<TKey>
+public abstract class EntityBase<TKey> : Notifiable<Notification>, IEntityBase<TKey>
 {
     /// <summary>
     ///     Gets or sets the notifiable.

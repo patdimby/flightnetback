@@ -1,10 +1,10 @@
-﻿using Flight.Domain.Entities;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using Flight.Domain.Entities;
 using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
-using System.Linq;
-using System.Reflection;
 
 namespace Flight.Infrastructure.Data;
 

@@ -10,10 +10,10 @@ public interface IDeleteEntity
     /// </summary>
     bool IsDeleted { get; set; }
 }
-/// <summary>
-/// The delete entity.
-/// </summary>
 
+/// <summary>
+///     The delete entity.
+/// </summary>
 public interface IDeleteEntity<TKey> : IDeleteEntity, IEntityBase<TKey>
 {
 }

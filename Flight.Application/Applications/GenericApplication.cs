@@ -1,19 +1,19 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using AutoMapper;
 using Flight.Application.Interfaces;
 using Flight.Application.Results;
 using Flight.Domain.Core.Abstracts;
 using Flight.Domain.Interfaces;
 using Flunt.Notifications;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 
 namespace Flight.Application.Applications;
-/// <summary>
-/// The generic application.
-/// </summary>
 
+/// <summary>
+///     The generic application.
+/// </summary>
 public abstract class GenericApplication : Notifiable<Notification>, IGenericApplication<DeleteEntity<int>>
 {
     protected IMapper Mapper;
@@ -44,7 +44,7 @@ public abstract class GenericApplication : Notifiable<Notification>, IGenericApp
     }
 
     /// <summary>
-    /// Gets the async.
+    ///     Gets the async.
     /// </summary>
     /// <returns>A Task.</returns>
     public async Task<Result<IEnumerable<DeleteEntity<int>>>> GetAsync()
@@ -57,7 +57,7 @@ public abstract class GenericApplication : Notifiable<Notification>, IGenericApp
     }
 
     /// <summary>
-    /// Gets the by id async.
+    ///     Gets the by id async.
     /// </summary>
     /// <param name="id">The id.</param>
     /// <returns>A Task.</returns>
@@ -68,7 +68,7 @@ public abstract class GenericApplication : Notifiable<Notification>, IGenericApp
     }
 
     /// <summary>
-    /// Posts the async.
+    ///     Posts the async.
     /// </summary>
     /// <param name="entity">The entity.</param>
     /// <returns>A Task.</returns>
@@ -96,7 +96,7 @@ public abstract class GenericApplication : Notifiable<Notification>, IGenericApp
     }
 
     /// <summary>
-    /// Puts the async.
+    ///     Puts the async.
     /// </summary>
     /// <param name="entity">The entity.</param>
     /// <returns>A Task.</returns>

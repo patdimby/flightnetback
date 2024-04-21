@@ -1,8 +1,9 @@
 ﻿using Flight.Domain.Entities;
 using Flight.Domain.Interfaces;
+using Flight.Infrastructure.Contracts;
 using Flight.Infrastructure.Data;
 
-namespace Flight.Infrastructure.Contracts;
+namespace Flight.Infrastructure.Interfaces;
 
 public class AirlineRepository(FlightContext context) : GenericRepository<Airline>(context);
 

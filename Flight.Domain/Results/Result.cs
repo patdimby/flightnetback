@@ -2,7 +2,7 @@
 using System.Linq;
 using Flunt.Notifications;
 
-namespace Flight.Application.Results;
+namespace Flight.Domain.Results;
 
 /// <summary>
 ///     The result.

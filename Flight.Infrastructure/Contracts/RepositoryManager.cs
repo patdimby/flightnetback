@@ -2,6 +2,7 @@
 using Flight.Domain.Entities;
 using Flight.Domain.Interfaces;
 using Flight.Infrastructure.Data;
+using Flight.Infrastructure.Interfaces;
 
 namespace Flight.Infrastructure.Contracts;
 
@@ -9,6 +10,9 @@ public sealed class RepositoryManager(FlightContext repositoryContext) : IReposi
 {
     private readonly Lazy<IGenericRepository<Airline>> _airlineRepository = new(() => new
         AirlineRepository(repositoryContext));
+
+    private readonly Lazy<IGenericRepository<Airport>> _airportRepository = new(() => new
+        AirportRepository(repositoryContext));
 
     private readonly Lazy<IGenericRepository<Booking>> _bookingRepository = new(() => new
         BookingRepository(repositoryContext));
@@ -28,9 +32,6 @@ public sealed class RepositoryManager(FlightContext repositoryContext) : IReposi
     private readonly Lazy<IGenericRepository<Vehicle>> _vehicleRepository = new(() => new
         VehicleRepository(repositoryContext));
 
-    private readonly Lazy<IGenericRepository<Airport>> _airportRepository = new(() => new
-        AirportRepository(repositoryContext));
-
     public IGenericRepository<Airline> Airline => _airlineRepository.Value;
     public IGenericRepository<Airport> Airport => _airportRepository.Value;
     public IGenericRepository<Booking> Booking => _bookingRepository.Value;
@@ -39,5 +40,9 @@ public sealed class RepositoryManager(FlightContext repositoryContext) : IReposi
     public IGenericRepository<Domain.Entities.Flight> Flight => _flightRepository.Value;
     public IGenericRepository<Passenger> Passenger => _passengerRepository.Value;
     public IGenericRepository<Vehicle> Vehicle => _vehicleRepository.Value;
-    public void Save() => repositoryContext.SaveChanges();
+
+    public void Save()
+    {
+        repositoryContext.SaveChanges();
+    }
 }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Flight.Domain.Interfaces;
+using Flight.Domain.Results;
 using Flight.Infrastructure.Data;
+using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Flight.Infrastructure.Contracts;
@@ -12,22 +15,22 @@ namespace Flight.Infrastructure.Contracts;
 /// <summary>
 ///     The generic repository.
 /// </summary>
-public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
+public abstract class GenericRepository<T> : Notifiable<Notification>, IGenericRepository<T> where T : class
 {
     /// <summary>
     ///     Initializes a new instance of the <see cref="GenericRepository" /> class.
     /// </summary>
     /// <param name="context">The context.</param>
-    public GenericRepository(FlightContext context)
+    protected GenericRepository(FlightContext context)
     {
         Context = context;
     }
 
     //The following variable is going to hold the FlightContext instance
     /// <summary>
-    /// Gets or sets the context.
+    ///     Gets or sets the context.
     /// </summary>
-    protected FlightContext Context { get; set; }
+    private FlightContext Context { get; }
 
     /// <summary>
     ///     Adds the async.
@@ -93,6 +96,19 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
     }
 
     /// <summary>
+    ///     Gets the async.
+    /// </summary>
+    /// <returns>A Task.</returns>
+    public async Task<Result<IEnumerable<T>>> GetAsync()
+    {
+        var alls = await SelectAllAsync();
+
+        return alls != null
+            ? Result<IEnumerable<T>>.Ok(alls)
+            : null;
+    }
+
+    /// <summary>
     ///     Deletes the async.
     /// </summary>
     /// <param name="id">The id.</param>
@@ -106,19 +122,57 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
     }
 
     /// <summary>
+    ///     Removes the async.
+    /// </summary>
+    /// <param name="id">The id.</param>
+    /// <returns>A Task.</returns>
+    public async Task<Result> RemoveAsync(int id)
+    {
+        try
+        {
+            await DeleteAsync(id);
+            return Result.Ok();
+        }
+        catch (Exception ex)
+        {
+            if (ex.InnerException != null)
+                return Result.Error(new ReadOnlyCollection<Notification>(new List<Notification>
+                {
+                    new(nameof(T), ex.InnerException.Message)
+                }));
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    ///     Gets the all async.
+    /// </summary>
+    /// <returns>A Task.</returns>
+    public async Task<Result<IEnumerable<T>>> GetAllAsync()
+    {
+        var alls = await SelectAllAsync();
+
+        return alls != null
+            ? Result<IEnumerable<T>>.Ok(alls)
+            : null;
+    }
+
+    /// <summary>
     ///     Gets the.
     /// </summary>
     /// <param name="expression">The expression.</param>
     /// <param name="trackChanges"></param>
     /// <returns>An IQueryable.</returns>
     public IQueryable<T> Get(Expression<Func<T, bool>> expression, bool trackChanges)
-        =>
-            !trackChanges
-                ? Context.Set<T>()
-                    .Where(expression)
-                    .AsNoTracking()
-                : Context.Set<T>()
-                    .Where(expression);
+    {
+        return !trackChanges
+            ? Context.Set<T>()
+                .Where(expression)
+                .AsNoTracking()
+            : Context.Set<T>()
+                .Where(expression);
+    }
 
     /// <summary>
     ///     Gets the by id async.
@@ -128,6 +182,17 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
     public async Task<T> GetByIdAsync(int id)
     {
         return await Context.Set<T>().FindAsync(id);
+    }
+
+    /// <summary>
+    ///     Selects the by id async.
+    /// </summary>
+    /// <param name="id">The id.</param>
+    /// <returns>A Task.</returns>
+    public async Task<Result<T>> SelectByIdAsync(int id)
+    {
+        var item = await GetByIdAsync(id);
+        return item != null ? Result<T>.Ok(item) : null;
     }
 
     /// <summary>
@@ -146,6 +211,34 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
     public async Task<int> Save()
     {
         return await Context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    ///     Posts the async.
+    /// </summary>
+    /// <param name="entity">The entity.</param>
+    /// <returns>A Task.</returns>
+    public async Task<Result> PostAsync(T entity)
+    {
+        if (!IsValid)
+            return Result.Error(Notifications);
+
+        try
+        {
+            await AddAsync(entity);
+
+            return Result.Ok();
+        }
+        catch (Exception ex)
+        {
+            if (ex.InnerException != null)
+                return Result.Error(new ReadOnlyCollection<Notification>(new List<Notification>
+                {
+                    new(nameof(T), ex.InnerException.Message)
+                }));
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -199,10 +292,12 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
     }
 
     /// <summary>
-    ///     This method is going to update the record in the table
-    ///     It will receive the object as an argument
-    ///     <param name="entity">The entity.</param>
-    ///     <returns>A Task.</returns>
+    ///     Updates the.
+    /// </summary>
+    /// This method is going to update the record in the table
+    /// It will receive the object as an argument
+    /// <param name="entity">The entity.</param>
+    /// <returns>A Task.</returns>
     public async Task<int> Update(T entity)
     {
         try
@@ -230,7 +325,7 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
     }
 
     /// <summary>
-    /// Updates the async.
+    ///     Updates the async.
     /// </summary>
     /// <param name="old">The old.</param>
     /// <param name="entity">The entity.</param>
@@ -248,9 +343,36 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
         }
     }
 
-    public IQueryable<T> FindAll(bool trackChanges) =>
-        !trackChanges
+    /// <summary>
+    ///     Finds the all.
+    /// </summary>
+    /// <param name="trackChanges">If true, track changes.</param>
+    /// <returns>An IQueryable.</returns>
+    public IQueryable<T> FindAll(bool trackChanges)
+    {
+        return !trackChanges
             ? Context.Set<T>()
                 .AsNoTracking()
             : Context.Set<T>();
+    }
+
+    public async Task<Result> PutAsync(T old, T entity)
+    {
+        try
+        {
+            await UpdateAsync(old, entity);
+
+            return Result.Ok();
+        }
+        catch (Exception ex)
+        {
+            if (ex.InnerException != null)
+                return Result.Error(new ReadOnlyCollection<Notification>(new List<Notification>
+                {
+                    new(nameof(T), ex.InnerException.Message)
+                }));
+        }
+
+        return null;
+    }
 }

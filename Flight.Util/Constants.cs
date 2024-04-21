@@ -6,7 +6,7 @@
 public static class Constants
 {
     /// <summary>
-    /// The routs.
+    ///     The routs.
     /// </summary>
     public static class Routs
     {
@@ -22,7 +22,7 @@ public static class Constants
     public static class ReturnMessages
     {
         /// <summary>
-        /// The not found.
+        ///     The not found.
         /// </summary>
         public const string NotFound = "No record found";
     }

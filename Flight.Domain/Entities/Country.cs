@@ -1,7 +1,7 @@
-﻿using Flight.Domain.Core.Abstracts;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Flight.Domain.Core.Abstracts;
+using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 

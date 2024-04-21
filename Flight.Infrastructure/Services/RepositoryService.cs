@@ -1,6 +1,5 @@
-﻿using Flight.Domain.Entities;
-using Flight.Domain.Interfaces;
-using Flight.Infrastructure.Contracts;
+﻿using Flight.Infrastructure.Contracts;
+using Flight.Infrastructure.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Flight.Infrastructure.Services;

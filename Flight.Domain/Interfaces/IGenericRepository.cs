@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Flight.Domain.Results;
 
 namespace Flight.Domain.Interfaces;
 
@@ -141,11 +142,18 @@ public interface IGenericRepository<T> where T : class
     Task<IEnumerable<T>> SelectAllAsync();
 
     /// <summary>
-    /// Updates the async.
+    ///     Updates the async.
     /// </summary>
     /// <param name="old">The old.</param>
     /// <param name="entity">The entity.</param>
     /// <returns>A Task.</returns>
     Task<int> UpdateAsync(T old, T entity);
+
     IQueryable<T> FindAll(bool trackChanges);
+    Task<Result> PutAsync(T old, T entity);
+    Task<Result> PostAsync(T entity);
+    Task<Result<T>> SelectByIdAsync(int id);
+    Task<Result<IEnumerable<T>>> GetAllAsync();
+    Task<Result> RemoveAsync(int id);
+    Task<Result<IEnumerable<T>>> GetAsync();
 }

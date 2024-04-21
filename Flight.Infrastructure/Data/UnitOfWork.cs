@@ -1,10 +1,10 @@
-﻿using Flight.Domain.Interfaces;
-using Flight.Domain.SeedWork;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections;
 using System.Threading.Tasks;
+using Flight.Domain.Interfaces;
+using Flight.Domain.SeedWork;
 using Flight.Infrastructure.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Flight.Infrastructure.Data;
 
