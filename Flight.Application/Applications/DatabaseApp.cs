@@ -3,19 +3,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Flight.Infrastructure.Services;
+namespace Flight.Application.Applications;
 
 /// <summary>
 ///     The database service.
 /// </summary>
-public static class DatabaseService
+public static class DatabaseApp
 {
     /// <summary>
     ///     The add data context.
     /// </summary>
     public static void AddDataContext(this IServiceCollection services, IConfiguration configuration)
     {
+        var connString = configuration.GetSection("DbConn").Value;
         services.AddDbContext<FlightContext>(opt =>
-            opt.UseSqlServer(configuration.GetConnectionString("SqlServerConnectionString")));
+            opt.UseMySql(connString, ServerVersion.AutoDetect(connString)));
     }
 }

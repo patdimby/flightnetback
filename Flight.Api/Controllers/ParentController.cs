@@ -1,4 +1,4 @@
-﻿using Flight.Application.Applications;
+﻿using Flight.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flight.Api.Controllers;
@@ -8,7 +8,9 @@ namespace Flight.Api.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class ParentController : ControllerBase
+public class ParentController(IServiceManager service, IRepositoryManager manager) : ControllerBase
 {
-    protected BaseApplication _application;
+    protected readonly IServiceManager _service = service;
+
+    protected IRepositoryManager _manager = manager;
 }

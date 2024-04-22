@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using Flight.Application.Applications;
-using Flight.Domain.Entities;
-using Flight.Domain.Interfaces;
+﻿using Flight.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Flight.Api.Controllers;
 
@@ -11,7 +9,17 @@ namespace Flight.Api.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class CityController(IMapper mapper, IGenericRepository<City> repository) : ControllerBase
+public class CityController(IServiceManager service, IRepositoryManager manager) : ParentController(service, manager)
 {
-    public BaseApplication _baseApplication = new(mapper, repository);
+    /// <summary>
+    /// Gets the cities.
+    /// </summary>
+    /// <returns>A Task.</returns>
+    [HttpGet]
+    public async Task<IActionResult> GetCities()
+    {
+        var companies = await _manager.City.AllAsync();
+
+        return Ok(companies);
+    }
 }

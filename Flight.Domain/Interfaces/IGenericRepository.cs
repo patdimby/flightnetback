@@ -149,11 +149,5 @@ public interface IGenericRepository<T> where T : class
     /// <returns>A Task.</returns>
     Task<int> UpdateAsync(T old, T entity);
 
-    IQueryable<T> FindAll(bool trackChanges);
-    Task<Result> PutAsync(T old, T entity);
-    Task<Result> PostAsync(T entity);
-    Task<Result<T>> SelectByIdAsync(int id);
-    Task<Result<IEnumerable<T>>> GetAllAsync();
-    Task<Result> RemoveAsync(int id);
-    Task<Result<IEnumerable<T>>> GetAsync();
+    
 }

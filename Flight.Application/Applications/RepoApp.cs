@@ -1,13 +1,14 @@
 ﻿using Flight.Infrastructure.Contracts;
+using Flight.Infrastructure.Implementations;
 using Flight.Infrastructure.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Flight.Infrastructure.Services;
+namespace Flight.Application.Applications;
 
 /// <summary>
 ///     The repository service.
 /// </summary>
-public static class RepositoryService
+public static class RepoApp
 {
     /// <summary>
     ///     Adds the repository service.
@@ -16,5 +17,6 @@ public static class RepositoryService
     public static void AddRepoService(this IServiceCollection services)
     {
         services.AddScoped<IRepositoryManager, RepositoryManager>();
+        services.AddScoped<IServiceManager, ServiceManager>();
     }
 }

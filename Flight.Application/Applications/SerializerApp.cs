@@ -3,12 +3,12 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Flight.Infrastructure.Services;
+namespace Flight.Application.Applications;
 
 /// <summary>
 ///     The json service.
 /// </summary>
-public static class FormatterService
+public static class SerializerApp
 {
     /// <summary>
     ///     Adds the json formatter.

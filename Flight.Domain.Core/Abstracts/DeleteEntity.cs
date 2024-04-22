@@ -1,4 +1,5 @@
-﻿using Flight.Domain.Core.Interfaces;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Flight.Domain.Core.Interfaces;
 
 namespace Flight.Domain.Core.Abstracts;
 
@@ -10,10 +11,10 @@ public abstract class DeleteEntity<TKey> : EntityBase<TKey>, IDeleteEntity<TKey>
     /// <summary>
     ///     Gets or sets a value indicating whether is active.
     /// </summary>
-    public bool IsActive { get; set; }
+    [Column("activated")]public bool IsActive { get; set; } = true;
 
     /// <summary>
     ///     Gets or sets a value indicating whether is deleted.
     /// </summary>
-    public bool IsDeleted { get; set; }
+    [Column("deleted")]public bool IsDeleted { get; set; } = false;
 }

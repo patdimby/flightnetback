@@ -1,3 +1,4 @@
+using Flight.CrossCutting.Assemblies;
 using Flight.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +28,7 @@ public class Startup
     /// <summary>
     ///     Gets the configuration.
     /// </summary>
-    public IConfiguration Configuration { get; }
+    private IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     /// <summary>

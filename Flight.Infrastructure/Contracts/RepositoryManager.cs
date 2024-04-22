@@ -1,10 +1,13 @@
-﻿using System;
-using Flight.Domain.Entities;
+﻿using Flight.Domain.Entities;
 using Flight.Domain.Interfaces;
 using Flight.Infrastructure.Data;
 using Flight.Infrastructure.Interfaces;
+using System;
 
 namespace Flight.Infrastructure.Contracts;
+/// <summary>
+/// The repository manager.
+/// </summary>
 
 public sealed class RepositoryManager(FlightContext repositoryContext) : IRepositoryManager
 {
@@ -32,15 +35,49 @@ public sealed class RepositoryManager(FlightContext repositoryContext) : IReposi
     private readonly Lazy<IGenericRepository<Vehicle>> _vehicleRepository = new(() => new
         VehicleRepository(repositoryContext));
 
+    /// <summary>
+    /// Gets the airline.
+    /// </summary>
     public IGenericRepository<Airline> Airline => _airlineRepository.Value;
+
+    /// <summary>
+    /// Gets the airport.
+    /// </summary>
     public IGenericRepository<Airport> Airport => _airportRepository.Value;
+
+    /// <summary>
+    /// Gets the booking.
+    /// </summary>
     public IGenericRepository<Booking> Booking => _bookingRepository.Value;
+
+    /// <summary>
+    /// Gets the city.
+    /// </summary>
     public IGenericRepository<City> City => _cityRepository.Value;
+
+    /// <summary>
+    /// Gets the country.
+    /// </summary>
     public IGenericRepository<Country> Country => _countryRepository.Value;
+
+    /// <summary>
+    /// Gets the flight.
+    /// </summary>
     public IGenericRepository<Domain.Entities.Flight> Flight => _flightRepository.Value;
+
+    /// <summary>
+    /// Gets the passenger.
+    /// </summary>
     public IGenericRepository<Passenger> Passenger => _passengerRepository.Value;
+
+    /// <summary>
+    /// Gets the vehicle.
+    /// </summary>
     public IGenericRepository<Vehicle> Vehicle => _vehicleRepository.Value;
 
+    /// <summary>
+    /// Saves the.
+    /// </summary>
     public void Save()
     {
         repositoryContext.SaveChanges();
