@@ -22,9 +22,9 @@ public abstract class Service<T>(IRepositoryManager repository, ILoggerManager l
     /// <returns>A Task.</returns>
     public async Task<int> CreateAsync(DeleteEntity<int> entity)
     {       
-            if (entity is Airline)
+            if (entity is Airline airline)
             {
-                return await _repository.Airline.AddAsync((Airline)entity);
+                return await _repository.Airline.AddAsync(airline);
             }
             
        return 0;

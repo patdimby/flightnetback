@@ -1,4 +1,3 @@
-using Flight.CrossCutting.Assemblies;
 using Flight.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,14 +36,13 @@ public class Startup
     /// <param name="services">The services.</param>
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<FlightContext>(opt =>
-            opt.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString")));
-
-        services.AddControllers();
+        var connString = Configuration.GetConnectionString("DbConn");
+        services.AddDbContext<FlightContext>(opt =>          
+        opt.UseMySql(connString, ServerVersion.AutoDetect(connString)))
+        .AddControllers();
        
-        services.AddSingleton(typeof(IMemoryCache), typeof(MemoryCache));
-
-        services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+        services.AddSingleton(typeof(IMemoryCache), typeof(MemoryCache))
+            .AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 
         services.AddSwaggerGen();
     }

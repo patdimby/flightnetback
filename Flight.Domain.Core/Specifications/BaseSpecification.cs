@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Flight.Domain.Core.Interfaces;
 
 namespace Flight.Domain.Core.Specifications;
 
@@ -54,7 +55,7 @@ public class BaseSpecification<T> : ISpecifications<T>
     /// <summary>
     ///     Gets the skip.
     /// </summary>
-    public int Skip { get; }
+    public int Skip { get; set; }
 
     /// <summary>
     ///     Gets a value indicating whether paging is enabled.
@@ -96,7 +97,7 @@ public class BaseSpecification<T> : ISpecifications<T>
     public void ApplyPagging(int take, int skip)
     {
         Take = take;
-        //Skip = skip;
+        Skip = skip;
         IsPagingEnabled = true;
     }
 }

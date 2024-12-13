@@ -5,12 +5,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="13.0.1"/>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Flight.Domain\Flight.Domain.csproj"/>
-        <ProjectReference Include="..\Flight.Infrastructure\Flight.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Flight.Domain\Flight.Domain.csproj" />
+        <ProjectReference Include="..\Flight.Infrastructure\Flight.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

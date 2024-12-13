@@ -8,7 +8,7 @@ namespace Flight.Application.Applications;
 /// <summary>
 ///     The repository service.
 /// </summary>
-public static class RepoApp
+public static class RepoService
 {
     /// <summary>
     ///     Adds the repository service.

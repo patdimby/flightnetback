@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Flight.Domain.Core.Specifications;
+namespace Flight.Domain.Core.Interfaces;
 
 /// <summary>
 ///     The specifications.

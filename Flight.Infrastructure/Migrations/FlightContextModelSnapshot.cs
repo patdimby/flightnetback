@@ -22,45 +22,6 @@ namespace Flight.Infrastructure.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Flight.Domain.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int")
-                        .HasColumnName("country_id");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<decimal>("Lat")
-                        .HasColumnType("decimal(7,4)")
-                        .HasColumnName("lat");
-
-                    b.Property<decimal>("Lon")
-                        .HasColumnType("decimal(7,4)")
-                        .HasColumnName("lon");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("Cities");
-                });
-
             modelBuilder.Entity("Flight.Domain.Entities.Airline", b =>
                 {
                     b.Property<int>("Id")
@@ -74,10 +35,12 @@ namespace Flight.Infrastructure.Migrations
                         .HasColumnName("flag");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("activated");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("deleted");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -107,10 +70,12 @@ namespace Flight.Infrastructure.Migrations
                         .HasColumnName("flag");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("activated");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("deleted");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -144,10 +109,12 @@ namespace Flight.Infrastructure.Migrations
                         .HasColumnName("flight_type");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("activated");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("deleted");
 
                     b.Property<int>("state")
                         .HasColumnType("int")
@@ -158,6 +125,47 @@ namespace Flight.Infrastructure.Migrations
                     b.HasIndex("FlightId");
 
                     b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("Flight.Domain.Entities.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int")
+                        .HasColumnName("country_id");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("activated");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("deleted");
+
+                    b.Property<decimal>("Lat")
+                        .HasColumnType("decimal(7,4)")
+                        .HasColumnName("lat");
+
+                    b.Property<decimal>("Lon")
+                        .HasColumnType("decimal(7,4)")
+                        .HasColumnName("lon");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Flight.Domain.Entities.Country", b =>
@@ -177,10 +185,12 @@ namespace Flight.Infrastructure.Migrations
                         .HasColumnName("iso3");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("activated");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("deleted");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext")
@@ -234,10 +244,12 @@ namespace Flight.Infrastructure.Migrations
                         .HasColumnName("flight_from");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("activated");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("deleted");
 
                     b.Property<int>("To")
                         .HasColumnType("int")
@@ -276,10 +288,12 @@ namespace Flight.Infrastructure.Migrations
                         .HasColumnName("email");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("activated");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("deleted");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(100)
@@ -315,10 +329,12 @@ namespace Flight.Infrastructure.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("activated");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("deleted");
 
                     b.Property<string>("LicensePlate")
                         .HasColumnType("longtext")
@@ -345,17 +361,6 @@ namespace Flight.Infrastructure.Migrations
                     b.ToTable("Vehicles");
                 });
 
-            modelBuilder.Entity("Flight.Domain.City", b =>
-                {
-                    b.HasOne("Flight.Domain.Entities.Country", "Country")
-                        .WithMany("Cities")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
             modelBuilder.Entity("Flight.Domain.Entities.Booking", b =>
                 {
                     b.HasOne("Flight.Domain.Entities.Flight", "Plane")
@@ -365,6 +370,17 @@ namespace Flight.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Plane");
+                });
+
+            modelBuilder.Entity("Flight.Domain.Entities.City", b =>
+                {
+                    b.HasOne("Flight.Domain.Entities.Country", "Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("Flight.Domain.Entities.Flight", b =>

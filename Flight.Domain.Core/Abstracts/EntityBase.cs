@@ -8,14 +8,13 @@ namespace Flight.Domain.Core.Abstracts;
 /// <summary>
 ///     The entity base.
 /// </summary>
-public abstract class EntityBase<TKey> : Notifiable<Notification>, IEntityBase<TKey>
+public abstract class EntityBase<TKey> : Notifiable<BaseNotification>, IEntityBase<TKey>
 {
     /// <summary>
     ///     Gets or sets the notifiable.
     /// </summary>
     [NotMapped]
-    public Notifiable<Notification> Notifiable { get; set; }
-
+    public Notifiable<BaseNotification> Notifiable { get; set; }
     /// <summary>
     ///     Gets or sets the id.
     /// </summary>

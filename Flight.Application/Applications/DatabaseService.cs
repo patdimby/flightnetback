@@ -8,7 +8,7 @@ namespace Flight.Application.Applications;
 /// <summary>
 ///     The database service.
 /// </summary>
-public static class DatabaseApp
+public static class DatabaseService
 {
     /// <summary>
     ///     The add data context.
