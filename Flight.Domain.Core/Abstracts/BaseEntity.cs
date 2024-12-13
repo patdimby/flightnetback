@@ -28,7 +28,7 @@ public class BaseEntity : Notifiable<Notification>
     /// <summary>
     ///     Date where entity is modified
     /// </summary>
-    [Column("udated")]
+    [Column("updated")]
     [UpdateGreaterThanCreate("CreatedDate")]
     protected DateTime ModifiedDate { get; set; } = DateTime.UtcNow;
 

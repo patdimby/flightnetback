@@ -41,13 +41,7 @@ public class Startup
             opt.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString")));
 
         services.AddControllers();
-
-        //services.AddAutoMapper(AssemblyUtil.GetCurrentAssemblies());
-
-        //services.AddScoped<IVehicleApplication, VehicleApplication>();
-
-        //services.AddScoped<IRepository, VehicleRepository>();
-
+       
         services.AddSingleton(typeof(IMemoryCache), typeof(MemoryCache));
 
         services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
