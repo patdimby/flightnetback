@@ -15,7 +15,14 @@ public static class DatabaseService
     /// </summary>
     public static void AddDataContext(this IServiceCollection services, IConfiguration configuration)
     {
-        var connString = configuration.GetSection("DbConn").Value;
+        var connString = configuration.GetConnectionString("DbConn");
+        services.AddDbContext<FlightContext>(opt =>
+            opt.UseMySql(connString, ServerVersion.AutoDetect(connString)));
+    }
+
+    public static void AddDataContext(this IServiceCollection services)
+    {
+        var connString = "server=127.0.0.1; port=3306; user=root; password=Ma$terkey1; database=flights";
         services.AddDbContext<FlightContext>(opt =>
             opt.UseMySql(connString, ServerVersion.AutoDetect(connString)));
     }

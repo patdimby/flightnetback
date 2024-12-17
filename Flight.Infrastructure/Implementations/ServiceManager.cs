@@ -3,20 +3,25 @@ using Flight.Infrastructure.Interfaces;
 using System;
 
 namespace Flight.Infrastructure.Implementations;
+
 /// <summary>
 /// The service manager.
 /// </summary>
-
 public sealed class ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger) : IServiceManager
 {
-    private readonly Lazy<IService<Airline>> _airlineService = new Lazy<IService<Airline>>(() => new AirlineService(repositoryManager, logger));
-    private readonly Lazy<IService<Airport>> _airportService = new Lazy<IService<Airport>>(() => new AirportService(repositoryManager, logger));
-    private readonly Lazy<IService<Booking>> _bookingService = new Lazy<IService<Booking>>(() => new BookingService(repositoryManager, logger));
-    private readonly Lazy<IService<City>> _cityService = new Lazy<IService<City>>(() => new CityService(repositoryManager, logger));
-    private readonly Lazy<IService<Country>> _countryService = new Lazy<IService<Country>>(() => new CountryService(repositoryManager, logger));
-    private readonly Lazy<IService<Domain.Entities.Flight>> _flightService = new Lazy<IService<Domain.Entities.Flight>>(() => new FlightService(repositoryManager, logger));
-    private readonly Lazy<IService<Passenger>> _passengerService = new Lazy<IService<Passenger>>(() => new PassengerService(repositoryManager, logger));
-    private readonly Lazy<IService<Vehicle>> _vehicleService = new Lazy<IService<Vehicle>>(() => new VehicleService(repositoryManager, logger));
+    private readonly Lazy<IService<Airline>> _airlineService = new(() => new AirlineService(repositoryManager, logger));
+    private readonly Lazy<IService<Airport>> _airportService = new(() => new AirportService(repositoryManager, logger));
+    private readonly Lazy<IService<Booking>> _bookingService = new(() => new BookingService(repositoryManager, logger));
+    private readonly Lazy<IService<City>> _cityService = new(() => new CityService(repositoryManager, logger));
+    private readonly Lazy<IService<Country>> _countryService = new(() => new CountryService(repositoryManager, logger));
+
+    private readonly Lazy<IService<Domain.Entities.Flight>> _flightService =
+        new(() => new FlightService(repositoryManager, logger));
+
+    private readonly Lazy<IService<Passenger>> _passengerService =
+        new(() => new PassengerService(repositoryManager, logger));
+
+    private readonly Lazy<IService<Vehicle>> _vehicleService = new(() => new VehicleService(repositoryManager, logger));
 
     /// <summary>
     /// Gets the airline service.

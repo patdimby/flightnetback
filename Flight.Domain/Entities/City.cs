@@ -28,7 +28,7 @@ public class City : DeleteEntity<int>
     ///     City latitude
     /// </summary>
 
-    [JsonProperty(PropertyName = "name")]
+    [JsonProperty(PropertyName = "lat")]
     [Column("lat", TypeName = "decimal(7,4)")]
     public decimal Lat { get; set; }
 
@@ -36,6 +36,7 @@ public class City : DeleteEntity<int>
     ///     City longitude
     /// </summary>
     [Column("lon", TypeName = "decimal(7,4)")]
+    [JsonProperty(PropertyName = "lon")]
     public decimal Lon { get; set; }
 
     /// <summary>

@@ -19,7 +19,6 @@ public class CityController(IServiceManager service, IRepositoryManager manager)
     public async Task<IActionResult> GetCities()
     {
         var companies = await _manager.City.AllAsync();
-
         return Ok(companies);
     }
 }

@@ -38,7 +38,7 @@ public interface IService<T> where T : DeleteEntity<int>
     /// <param name="trackChanges">If true, track changes.</param>
     /// <returns>A Task.</returns>
     Task<IEnumerable<DeleteEntity<int>>> GetByIdsAsync(IEnumerable<int> ids, bool
-    trackChanges);
+        trackChanges);
 
     /// <summary>
     /// Creates the collection async.
@@ -46,7 +46,7 @@ public interface IService<T> where T : DeleteEntity<int>
     /// <param name="entityCollection">The entity collection.</param>
     /// <returns>A Task.</returns>
     Task<(IEnumerable<DeleteEntity<int>> entities, string ids)> CreateCollectionAsync
-    (IEnumerable<DeleteEntity<int>> entityCollection);
+        (IEnumerable<DeleteEntity<int>> entityCollection);
 
     /// <summary>
     /// Deletes the async.

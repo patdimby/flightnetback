@@ -7,8 +7,17 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
-public record FlightRecord(int Id, string Code, DateTime Departure, DateTime EstimatedArrival, int BusinessClassSlots, int EconomySlots, float BusinessClassPrice, float EconomyPrice, int To, int From);
-
+public record FlightRecord(
+    int Id,
+    string Code,
+    DateTime Departure,
+    DateTime EstimatedArrival,
+    int BusinessClassSlots,
+    int EconomySlots,
+    float BusinessClassPrice,
+    float EconomyPrice,
+    int To,
+    int From);
 
 /// <summary>
 ///     The flight.

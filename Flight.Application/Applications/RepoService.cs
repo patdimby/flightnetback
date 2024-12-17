@@ -16,6 +16,7 @@ public static class RepoService
     /// <param name="services">The services.</param>
     public static void AddRepoService(this IServiceCollection services)
     {
+        services.AddScoped<ILoggerManager, LoggerManager>();
         services.AddScoped<IRepositoryManager, RepositoryManager>();
         services.AddScoped<IServiceManager, ServiceManager>();
     }

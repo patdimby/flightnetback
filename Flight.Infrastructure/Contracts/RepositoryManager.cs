@@ -5,10 +5,10 @@ using Flight.Infrastructure.Interfaces;
 using System;
 
 namespace Flight.Infrastructure.Contracts;
+
 /// <summary>
 /// The repository manager.
 /// </summary>
-
 public sealed class RepositoryManager(FlightContext repositoryContext) : IRepositoryManager
 {
     private readonly Lazy<IGenericRepository<Airline>> _airlineRepository = new(() => new

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Flight.Domain.Entities;
-using Flunt.Notifications;
+﻿using Flight.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Flight.Infrastructure.Data;
 
@@ -63,15 +58,7 @@ public class FlightContext : DbContext
         optionsBuilder.UseMySql(connString, ServerVersion.AutoDetect(connString));
     }
 
-    /// <summary>
-    ///     Begins the transaction.
-    /// </summary>
-    /// <summary>
-    ///     Ons the model creating.
-    /// </summary>
-    /// <param name="modelBuilder">The model builder.</param>
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public FlightContext(DbContextOptions options) : base(options)
     {
-        //
     }
 }

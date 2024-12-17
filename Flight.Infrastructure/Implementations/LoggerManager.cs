@@ -2,10 +2,10 @@
 using NLog;
 
 namespace Flight.Infrastructure.Implementations;
+
 /// <summary>
 /// The logger manager.
 /// </summary>
-
 public class LoggerManager : ILoggerManager
 {
     private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();

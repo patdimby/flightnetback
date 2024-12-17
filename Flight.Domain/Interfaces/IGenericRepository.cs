@@ -148,6 +148,4 @@ public interface IGenericRepository<T> where T : class
     /// <param name="entity">The entity.</param>
     /// <returns>A Task.</returns>
     Task<int> UpdateAsync(T old, T entity);
-
-    
 }

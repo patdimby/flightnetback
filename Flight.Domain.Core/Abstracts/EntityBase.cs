@@ -15,6 +15,7 @@ public abstract class EntityBase<TKey> : Notifiable<BaseNotification>, IEntityBa
     /// </summary>
     [NotMapped]
     public Notifiable<BaseNotification> Notifiable { get; set; }
+
     /// <summary>
     ///     Gets or sets the id.
     /// </summary>

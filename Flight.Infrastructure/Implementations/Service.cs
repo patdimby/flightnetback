@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Flight.Infrastructure.Implementations;
+
 /// <summary>
 /// The service.
 /// </summary>
-
 public abstract class Service<T>(IRepositoryManager repository, ILoggerManager logger) : IService<T>
     where T : DeleteEntity<int>
 {
@@ -21,16 +21,14 @@ public abstract class Service<T>(IRepositoryManager repository, ILoggerManager l
     /// <param name="entity">The entity.</param>
     /// <returns>A Task.</returns>
     public async Task<int> CreateAsync(DeleteEntity<int> entity)
-    {       
-            if (entity is Airline airline)
-            {
-                return await _repository.Airline.AddAsync(airline);
-            }
-            
-       return 0;
+    {
+        if (entity is Airline airline) return await _repository.Airline.AddAsync(airline);
+
+        return 0;
     }
 
-    public Task<(IEnumerable<DeleteEntity<int>> entities, string ids)> CreateCollectionAsync(IEnumerable<DeleteEntity<int>> entityCollection)
+    public Task<(IEnumerable<DeleteEntity<int>> entities, string ids)> CreateCollectionAsync(
+        IEnumerable<DeleteEntity<int>> entityCollection)
     {
         throw new System.NotImplementedException();
     }
