@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Flight.Domain.Core.Abstracts;
 using Flight.Infrastructure.Interfaces;
 
 namespace Flight.Application.Concrete;
 
-public class Service : IService<DeleteEntity<int>>
+public class Service(DeleteEntity<int> entity) : IService<DeleteEntity<int>>
 {
-    private DeleteEntity<int> _entity;
-
-    public Service(DeleteEntity<int> entity)
-    {
-        _entity = entity;
-    }
+    private DeleteEntity<int> _entity = entity;
 
     public Task<int> CreateAsync(DeleteEntity<int> entity)
     {

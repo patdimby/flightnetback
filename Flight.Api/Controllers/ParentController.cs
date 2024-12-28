@@ -10,7 +10,7 @@ namespace Flight.Api.Controllers;
 [ApiController]
 public class ParentController(IServiceManager service, IRepositoryManager manager) : ControllerBase
 {
-    protected readonly IServiceManager _service = service;
+    protected readonly IServiceManager Service = service;
 
-    protected IRepositoryManager _manager = manager;
+    protected IRepositoryManager Manager = manager;
 }

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Flight.Domain.Core.Abstracts;
 using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
-public record CountryRecord(int Id, string Name, string ISO2, string ISO3);
+public record CountryDto(int Id, string Name, string Iso2, string Iso3);
 
 /// <summary>
 ///     The country.
@@ -28,6 +29,7 @@ public class Country : DeleteEntity<int>
     /// </summary>
     [Column("name")]
     [JsonProperty(PropertyName = "name")]
+    [DataType(DataType.Text)]
     public string Name { get; set; } = null!;
 
     /// <summary>
@@ -35,6 +37,7 @@ public class Country : DeleteEntity<int>
     /// </summary>
     [Column("iso2")]
     [JsonProperty(PropertyName = "iso2")]
+    [DataType(DataType.Text)]
     public string ISO2 { get; set; } = null!;
 
     /// <summary>
@@ -42,6 +45,7 @@ public class Country : DeleteEntity<int>
     /// </summary>
     [Column("iso3")]
     [JsonProperty(PropertyName = "iso3")]
+    [DataType(DataType.Text)]
     public string ISO3 { get; set; } = null!;
 
     /// <summary>

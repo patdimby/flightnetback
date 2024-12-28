@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
-public record FlightRecord(
+public record FlightDto(
     int Id,
     string Code,
     DateTime Departure,
@@ -40,6 +40,7 @@ public class Flight : DeleteEntity<int>
     [MaxLength(30, ErrorMessage = "Maximum length for the Code is 30 characters.")]
     [Column("code")]
     [JsonProperty(PropertyName = "code")]
+    [DataType(DataType.Text)]
     public string Code { get; set; } = "";
 
     /// <summary>
@@ -48,6 +49,7 @@ public class Flight : DeleteEntity<int>
     [Required(ErrorMessage = "Date of departure is a required field.")]
     [Column("departure")]
     [JsonProperty(PropertyName = "departure")]
+    [DataType(DataType.DateTime)]
     public DateTime Departure { get; set; }
 
     /// <summary>
@@ -56,6 +58,7 @@ public class Flight : DeleteEntity<int>
     [Required(ErrorMessage = "Date of arrival is a required field.")]
     [Column("arrival")]
     [JsonProperty(PropertyName = "arrival")]
+    [DataType(DataType.DateTime)]
     public DateTime EstimatedArrival { get; set; }
 
     /// <summary>

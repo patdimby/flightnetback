@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Flight.Domain.Core.Attributes;
 using Flight.Domain.Core.Interfaces;
@@ -14,6 +15,7 @@ public abstract class AuditEntity<TKey> : DeleteEntity<TKey>, IAuditEntity<TKey>
     ///     Gets or sets the created date.
     /// </summary>
     [Column("created")]
+    [DataType(DataType.Date)]
     public DateTime CreatedDate { get; set; }
 
     /// <summary>
@@ -27,6 +29,7 @@ public abstract class AuditEntity<TKey> : DeleteEntity<TKey>, IAuditEntity<TKey>
     /// </summary>
     [UpdateGreaterThanCreate("CreatedDate")]
     [Column("updated")]
+    [DataType(DataType.Date)]
     public DateTime? UpdatedDate { get; set; }
 
     /// <summary>

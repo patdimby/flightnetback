@@ -8,7 +8,7 @@ namespace Flight.Infrastructure.Implementations;
 /// </summary>
 public class LoggerManager : ILoggerManager
 {
-    private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
     /// <summary>
     /// Logs the debug.
@@ -16,21 +16,21 @@ public class LoggerManager : ILoggerManager
     /// <param name="message">The message.</param>
     public void LogDebug(string message)
     {
-        _logger.Debug(message);
+        Logger.Debug(message);
     }
 
     public void LogError(string message)
     {
-        _logger.Error(message);
+        Logger.Error(message);
     }
 
     public void LogInfo(string message)
     {
-        _logger.Info(message);
+        Logger.Info(message);
     }
 
     public void LogWarn(string message)
     {
-        _logger.Warn(message);
+        Logger.Warn(message);
     }
 }

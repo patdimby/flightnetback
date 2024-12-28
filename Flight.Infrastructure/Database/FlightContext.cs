@@ -1,7 +1,7 @@
 ﻿using Flight.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Flight.Infrastructure.Data;
+namespace Flight.Infrastructure.Database;
 
 /// <summary>
 ///     The flight context.
@@ -60,5 +60,6 @@ public class FlightContext : DbContext
 
     public FlightContext(DbContextOptions options) : base(options)
     {
+        /* Drop it when lauch EF commands. */
     }
 }

@@ -13,13 +13,13 @@ public class Map : Profile
     /// </summary>
     public Map()
     {
-        CreateMap<City, CityRecord>();
-        CreateMap<Country, CountryRecord>();
+        CreateMap<City, CityDto>();
+        CreateMap<Country, CountryDto>();
         CreateMap<Vehicle, VehicleRecord>();
-        CreateMap<Airline, AirlineRecord>();
-        CreateMap<Airport, AirportRecord>();
-        CreateMap<Domain.Entities.Flight, FlightRecord>();
-        CreateMap<Booking, BookingRecord>();
+        CreateMap<Airline, AirlineDto>();
+        CreateMap<Airport, AirportDto>();
+        CreateMap<Domain.Entities.Flight, FlightDto>();
+        CreateMap<Booking, BookingDto>();
         CreateMap<Passenger, PassengerRecord>();
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Flight.Domain.Entities;
 using Flight.Domain.Interfaces;
-using Flight.Infrastructure.Data;
 using Flight.Infrastructure.Interfaces;
 using System;
+using Flight.Domain.Core.Abstracts;
+using Flight.Infrastructure.Database;
 
 namespace Flight.Infrastructure.Contracts;
 
@@ -34,6 +35,8 @@ public sealed class RepositoryManager(FlightContext repositoryContext) : IReposi
 
     private readonly Lazy<IGenericRepository<Vehicle>> _vehicleRepository = new(() => new
         VehicleRepository(repositoryContext));
+
+    public IGenericRepository<DeleteEntity<int>> Entity { get; }
 
     /// <summary>
     /// Gets the airline.

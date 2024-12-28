@@ -1,7 +1,8 @@
-﻿using Flight.Domain.Entities;
+﻿using Flight.Domain.Core.Abstracts;
+using Flight.Domain.Entities;
 using Flight.Domain.Interfaces;
 using Flight.Infrastructure.Contracts;
-using Flight.Infrastructure.Data;
+using Flight.Infrastructure.Database;
 
 namespace Flight.Infrastructure.Interfaces;
 
@@ -50,6 +51,7 @@ public class VehicleRepository(FlightContext context) : GenericRepository<Vehicl
 /// </summary>
 public interface IRepositoryManager
 {
+    IGenericRepository<DeleteEntity<int>> Entity { get; }
     /// <summary>
     /// Gets the airline.
     /// </summary>

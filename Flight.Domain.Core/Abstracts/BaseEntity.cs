@@ -23,6 +23,7 @@ public class BaseEntity : Notifiable<Notification>
     ///     Date creation of entity.
     /// </summary>
     [Column("created")]
+    [DataType(DataType.Date)]
     protected DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
     /// <summary>
@@ -30,6 +31,7 @@ public class BaseEntity : Notifiable<Notification>
     /// </summary>
     [Column("updated")]
     [UpdateGreaterThanCreate("CreatedDate")]
+    [DataType(DataType.Date)]
     protected DateTime ModifiedDate { get; set; } = DateTime.UtcNow;
 
     /// <summary>

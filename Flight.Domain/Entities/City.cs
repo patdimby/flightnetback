@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
-public record CityRecord(int Id, string Name, decimal Lat, decimal Lon, int CountryId);
+public record CityDto(int Id, string Name, decimal Lat, decimal Lon, int CountryId);
 
 /// <summary>
 ///     The city.
@@ -22,6 +22,7 @@ public class City : DeleteEntity<int>
     [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
     [Column("name")]
     [JsonProperty(PropertyName = "name")]
+    [DataType(DataType.Text)]
     public string Name { get; set; } = null!;
 
     /// <summary>

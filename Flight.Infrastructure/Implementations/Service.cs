@@ -12,8 +12,8 @@ namespace Flight.Infrastructure.Implementations;
 public abstract class Service<T>(IRepositoryManager repository, ILoggerManager logger) : IService<T>
     where T : DeleteEntity<int>
 {
-    protected readonly IRepositoryManager _repository = repository;
-    protected readonly ILoggerManager _logger = logger;
+    protected readonly IRepositoryManager Repository = repository;
+    protected readonly ILoggerManager Logger = logger;
 
     /// <summary>
     /// Creates the async.
@@ -22,7 +22,7 @@ public abstract class Service<T>(IRepositoryManager repository, ILoggerManager l
     /// <returns>A Task.</returns>
     public async Task<int> CreateAsync(DeleteEntity<int> entity)
     {
-        if (entity is Airline airline) return await _repository.Airline.AddAsync(airline);
+        if (entity is Airline airline) return await Repository.Airline.AddAsync(airline);
 
         return 0;
     }
@@ -33,7 +33,7 @@ public abstract class Service<T>(IRepositoryManager repository, ILoggerManager l
         throw new System.NotImplementedException();
     }
 
-    public Task DeleteAsync(int Id, bool trackChanges)
+    public Task DeleteAsync(int id, bool trackChanges)
     {
         throw new System.NotImplementedException();
     }
@@ -43,7 +43,7 @@ public abstract class Service<T>(IRepositoryManager repository, ILoggerManager l
         throw new System.NotImplementedException();
     }
 
-    public Task<DeleteEntity<int>> GetAsync(int Id, bool trackChanges)
+    public Task<DeleteEntity<int>> GetAsync(int id, bool trackChanges)
     {
         throw new System.NotImplementedException();
     }

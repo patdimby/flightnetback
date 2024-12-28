@@ -15,7 +15,14 @@ public enum Genre
     Unknown
 }
 
-public record PassengerRecord;
+public record PassengerRecord(
+    int Id,
+    string Name,
+    string MiddleName,
+    string LastName,
+    string Email,
+    string Contact,
+    string Address);
 
 /// <summary>
 ///     The passenger.
@@ -30,6 +37,7 @@ public class Passenger : DeleteEntity<int>
     [MaxLength(50, ErrorMessage = "Maximum length for the Name is 50 characters.")]
     [Column("name")]
     [JsonProperty(PropertyName = "name")]
+    [DataType(DataType.Text)]
     public string Name { get; set; }
 
     /// <summary>
@@ -38,6 +46,7 @@ public class Passenger : DeleteEntity<int>
     [MaxLength(100, ErrorMessage = "Maximum length for middle name is 100 characters.")]
     [Column("middle_name")]
     [JsonProperty(PropertyName = "middle_name")]
+    [DataType(DataType.Text)]
     public string MiddleName { get; set; } = "";
 
     /// <summary>
@@ -46,6 +55,7 @@ public class Passenger : DeleteEntity<int>
     [MaxLength(100, ErrorMessage = "Maximum length for last name is 100 characters.")]
     [Column("last_name")]
     [JsonProperty(PropertyName = "last_name")]
+    [DataType(DataType.Text)]
     public string LastName { get; set; } = "";
 
     /// <summary>
@@ -56,6 +66,7 @@ public class Passenger : DeleteEntity<int>
     [Required(ErrorMessage = "Email is required.")]
     [Column("email")]
     [JsonProperty(PropertyName = "email")]
+    [DataType(DataType.EmailAddress)]
     public string Email { get; set; } = "";
 
     /// <summary>
@@ -64,6 +75,7 @@ public class Passenger : DeleteEntity<int>
     [Required(ErrorMessage = "Contact is required.")]
     [Column("contact")]
     [JsonProperty(PropertyName = "contact")]
+    [DataType(DataType.Text)]
     public string Contact { get; set; } = "";
 
     /// <summary>
@@ -72,6 +84,7 @@ public class Passenger : DeleteEntity<int>
     [Required(ErrorMessage = "Address is required.")]
     [Column("address")]
     [JsonProperty(PropertyName = "address")]
+    [DataType(DataType.Text)]
     public string Address { get; set; } = "";
 
     /// <summary>

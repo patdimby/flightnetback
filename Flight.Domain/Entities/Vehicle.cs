@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Flight.Domain.Core.Abstracts;
 using Newtonsoft.Json;
 
@@ -17,6 +18,7 @@ public class Vehicle : DeleteEntity<int>
     /// </summary>
     [Column("license")]
     [JsonProperty(PropertyName = "license")]
+    [DataType(DataType.Text)]
     public string LicensePlate { get; set; }
 
     /// <summary>
@@ -24,6 +26,7 @@ public class Vehicle : DeleteEntity<int>
     /// </summary>
     [Column("manufacturer")]
     [JsonProperty(PropertyName = "manufacturer")]
+    [DataType(DataType.Text)]
     public string Manufacturer { get; set; }
 
     /// <summary>
@@ -31,6 +34,7 @@ public class Vehicle : DeleteEntity<int>
     /// </summary>
     [Column("model")]
     [JsonProperty(PropertyName = "model")]
+    [DataType(DataType.Text)]
     public string Model { get; set; }
 
     /// <summary>

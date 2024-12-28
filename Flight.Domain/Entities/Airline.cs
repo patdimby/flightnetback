@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Flight.Domain.Entities;
 
 /// <summary>
-///     The status.
+///     The statue of airline.
 /// </summary>
 public enum State
 {
@@ -14,7 +14,7 @@ public enum State
     Inactive
 }
 
-public record AirlineRecord(int Id, string Name, Status Statut, int DeletedFlag);
+public record AirlineDto(int Id, string Name, Status Statut, int DeletedFlag);
 
 /// <summary>
 ///     The airline.
@@ -29,6 +29,7 @@ public class Airline : DeleteEntity<int>
     [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
     [Column("name")]
     [JsonProperty(PropertyName = "name")]
+    [DataType(DataType.Text)]
     public string Name { get; set; }
 
     /// <summary>

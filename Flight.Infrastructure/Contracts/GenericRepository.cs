@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Flight.Domain.Interfaces;
 using Flight.Domain.Results;
-using Flight.Infrastructure.Data;
+using Flight.Infrastructure.Database;
 using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 

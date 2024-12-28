@@ -12,33 +12,42 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDataContext();
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
-        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver())
+    .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// change all routes in lower case.
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+// builder.Services.AddOpenApi();
+
+// avoid error : Could not resolve reference: Could not resolve pointer:
+builder.Services.AddSwaggerGen(c =>  c.CustomSchemaIds(s => s.FullName.Replace("+", ".")));
+
+
 builder.Services.AddRepoService();
 builder.Services.AddSingleton<IMemoryCache, MemoryCache>();
 builder.Services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 
-
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+    //app.MapOpenApi();
 
-    app.UseSwaggerUI(opt => { opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Flight.Api"); });
+    app.UseSwagger();
+    app.UseSwaggerUI(opt => { opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Flight Api"); });    
 }
 
 app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.UseAuthorization();
-
-
 
 app.MapControllers();
 

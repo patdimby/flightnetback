@@ -23,7 +23,7 @@ public enum Status
     Cancelled
 }
 
-public record BookingRecord(int Id, Type FlightType, int FlightId, Flight Plane, State state);
+public record BookingDto(int Id, Type FlightType, int FlightId, Flight Plane, State state);
 
 /// <summary>
 ///     The reservation.
