@@ -5,6 +5,14 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
+public static class CityExtensions
+{
+    public static CityDto ToDto(this City city)
+    {
+        return new CityDto(city.Id, city.Name, city.Lat, city.Lon, city.CountryId);
+    }
+}
+
 public record CityDto(int Id, string Name, decimal Lat, decimal Lon, int CountryId);
 
 /// <summary>
@@ -13,6 +21,24 @@ public record CityDto(int Id, string Name, decimal Lat, decimal Lon, int Country
 [Table("Cities")]
 public class City : DeleteEntity<int>
 {
+    public City(CityDto dto)
+    {
+        Copy(dto);
+    }
+
+    public City()
+    {
+    }
+
+    public void Copy(CityDto dto)
+    {
+        Id = dto.Id > 0 ? dto.Id : 0;
+        Name = dto.Name;
+        Lat = dto.Lat;
+        Lon = dto.Lon;
+        CountryId = dto.CountryId;
+    }
+
     #region Properties
 
     /// <summary>

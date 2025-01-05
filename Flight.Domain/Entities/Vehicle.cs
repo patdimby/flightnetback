@@ -5,7 +5,16 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
-public record VehicleRecord(int Id, string LicensePlate, string Manufacturer, string Model, short Year, float Tariff);
+public static class VehicleExtensions
+{
+    public static VehicleDto ToDto(this Vehicle vehicle)
+    {
+        return new VehicleDto(vehicle.Id, vehicle.LicensePlate, vehicle.Manufacturer, vehicle.Model, vehicle.Year,
+            vehicle.Tariff);
+    }
+}
+
+public record VehicleDto(int Id, string LicensePlate, string Manufacturer, string Model, short Year, float Tariff);
 
 /// <summary>
 ///     The vehicle.
@@ -13,6 +22,15 @@ public record VehicleRecord(int Id, string LicensePlate, string Manufacturer, st
 [Table("Vehicles")]
 public class Vehicle : DeleteEntity<int>
 {
+    public Vehicle()
+    {
+    }
+
+    public Vehicle(VehicleDto dto)
+    {
+        Copy(dto);
+    }
+
     /// <summary>
     ///     Gets or sets the license plate.
     /// </summary>
@@ -50,4 +68,14 @@ public class Vehicle : DeleteEntity<int>
     [Column("tariff")]
     [JsonProperty(PropertyName = "tariff")]
     public float Tariff { get; set; }
+
+    public void Copy(VehicleDto dto)
+    {
+        Id = dto.Id > 0 ? dto.Id : 0;
+        LicensePlate = dto.LicensePlate;
+        Manufacturer = dto.Manufacturer;
+        Model = dto.Model;
+        Year = dto.Year;
+        Tariff = dto.Tariff;
+    }
 }

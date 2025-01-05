@@ -5,17 +5,21 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
-/// <summary>
-///     The genre.
-/// </summary>
-public enum Genre
+public static class PassengerExtensions
 {
-    Male,
-    Female,
-    Unknown
+    public static PassengerDto ToDto(this Passenger passenger)
+    {
+        return new PassengerDto(passenger.Id,
+            passenger.Name,
+            passenger.MiddleName,
+            passenger.LastName,
+            passenger.Email,
+            passenger.Contact,
+            passenger.Address);
+    }
 }
 
-public record PassengerRecord(
+public record PassengerDto(
     int Id,
     string Name,
     string MiddleName,
@@ -30,6 +34,15 @@ public record PassengerRecord(
 [Table("Passengers")]
 public class Passenger : DeleteEntity<int>
 {
+    public Passenger()
+    {
+    }
+
+    public Passenger(PassengerDto dto)
+    {
+        Copy(dto);
+    }
+
     /// <summary>
     ///     Gets or sets the name.
     /// </summary>
@@ -94,4 +107,15 @@ public class Passenger : DeleteEntity<int>
     [Column("genre")]
     [JsonProperty(PropertyName = "genre")]
     public Genre Sex { get; set; } = Genre.Unknown;
+
+    public void Copy(PassengerDto dto)
+    {
+        Id = dto.Id > 0 ? dto.Id : 0;
+        Name = dto.Name;
+        MiddleName = dto.MiddleName;
+        LastName = dto.LastName;
+        Email = dto.Email;
+        Contact = dto.Contact;
+        Address = dto.Address;
+    }
 }

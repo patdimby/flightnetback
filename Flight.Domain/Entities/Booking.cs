@@ -4,26 +4,16 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
-/// <summary>
-///     The flight type.
-/// </summary>
-public enum Type
+public static class BookingExtensions
 {
-    Business,
-    Economy
+    public static BookingDto ToDto(this Booking booking)
+    {
+        return new BookingDto(booking.Id, booking.FlightType, booking.FlightId,
+            booking.Plane, booking.Statut);
+    }
 }
 
-/// <summary>
-///     The state.
-/// </summary>
-public enum Status
-{
-    Pending,
-    Confirmed,
-    Cancelled
-}
-
-public record BookingDto(int Id, Type FlightType, int FlightId, Flight Plane, State state);
+public record BookingDto(int Id, Type FlightType, int FlightId, Flight Plane, Statut Statut);
 
 /// <summary>
 ///     The reservation.
@@ -31,6 +21,15 @@ public record BookingDto(int Id, Type FlightType, int FlightId, Flight Plane, St
 [Table("Bookings")]
 public class Booking : DeleteEntity<int>
 {
+    public Booking()
+    {
+    }
+
+    public Booking(BookingDto dto)
+    {
+        Copy(dto);
+    }
+
     /// <summary>
     ///     Gets or sets the flight type.
     /// </summary>
@@ -56,5 +55,14 @@ public class Booking : DeleteEntity<int>
     /// </summary>
     [Column("state")]
     [JsonProperty(PropertyName = "state")]
-    public Status state { get; set; }
+    public Statut Statut { get; set; }
+
+    public void Copy(BookingDto dto)
+    {
+        Id = dto.Id > 0 ? dto.Id : 0;
+        FlightType = dto.FlightType;
+        FlightId = dto.FlightId;
+        Plane = dto.Plane;
+        Statut = dto.Statut;
+    }
 }

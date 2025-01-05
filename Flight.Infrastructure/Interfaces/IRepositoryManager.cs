@@ -52,6 +52,7 @@ public class VehicleRepository(FlightContext context) : GenericRepository<Vehicl
 public interface IRepositoryManager
 {
     IGenericRepository<DeleteEntity<int>> Entity { get; }
+
     /// <summary>
     /// Gets the airline.
     /// </summary>

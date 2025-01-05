@@ -57,7 +57,7 @@ public abstract class GenericRepository<T> : Notifiable<Notification>, IGenericR
     /// <returns>A Task.</returns>
     public async Task<IEnumerable<T>> AllAsync()
     {
-        return await Context.Set<T>().ToListAsync();
+        return await Context.Set<T>().AsNoTracking().ToListAsync();
     }
 
     /// <summary>

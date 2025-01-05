@@ -8,7 +8,7 @@ namespace Flight.Application.Applications;
 /// <summary>
 ///     The json service.
 /// </summary>
-public static class SerializeService
+public static class SerializationMiddleware
 {
     /// <summary>
     ///     Adds the json formatter.

@@ -7,6 +7,23 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
+public static class FlightExtensions
+{
+    public static FlightDto ToDto(this Flight flight)
+    {
+        return new FlightDto(flight.Id,
+            flight.Code,
+            flight.Departure,
+            flight.EstimatedArrival,
+            flight.BusinessClassSlots,
+            flight.EconomySlots,
+            flight.BusinessClassPrice,
+            flight.EconomyPrice,
+            flight.To,
+            flight.From);
+    }
+}
+
 public record FlightDto(
     int Id,
     string Code,
@@ -30,7 +47,11 @@ public class Flight : DeleteEntity<int>
     /// </summary>
     public Flight()
     {
-        Bookings = [];
+    }
+
+    public Flight(FlightDto dto)
+    {
+        Copy(dto);
     }
 
     /// <summary>
@@ -92,7 +113,7 @@ public class Flight : DeleteEntity<int>
     /// <summary>
     ///     Gets or sets the reservations.
     /// </summary>
-    public virtual ICollection<Booking> Bookings { get; set; }
+    public virtual ICollection<Booking> Bookings { get; set; } = [];
 
     /// <summary>
     ///     Identification of destination airport.
@@ -119,4 +140,18 @@ public class Flight : DeleteEntity<int>
     /// </summary>
     [ForeignKey(nameof(From))]
     public virtual Airport DepartureAirport { get; set; }
+
+    public void Copy(FlightDto dto)
+    {
+        Id = dto.Id > 0 ? dto.Id : 0;
+        Code = dto.Code;
+        Departure = dto.Departure;
+        EstimatedArrival = dto.EstimatedArrival;
+        BusinessClassSlots = dto.BusinessClassSlots;
+        EconomySlots = dto.EconomySlots;
+        BusinessClassPrice = dto.BusinessClassPrice;
+        EconomyPrice = dto.EconomyPrice;
+        To = dto.To;
+        From = dto.From;
+    }
 }

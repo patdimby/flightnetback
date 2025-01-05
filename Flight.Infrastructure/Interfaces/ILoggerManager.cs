@@ -1,5 +1,3 @@
-
-
 namespace Flight.Infrastructure.Interfaces;
 
 public interface ILoggerManager

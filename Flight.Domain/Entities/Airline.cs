@@ -5,16 +5,15 @@ using Newtonsoft.Json;
 
 namespace Flight.Domain.Entities;
 
-/// <summary>
-///     The statue of airline.
-/// </summary>
-public enum State
+public static class AirlineExtensions
 {
-    Active,
-    Inactive
+    public static AirlineDto ToDto(this Airline airline)
+    {
+        return new AirlineDto(airline.Id, airline.Name, airline.State, airline.DeletedFlag);
+    }
 }
 
-public record AirlineDto(int Id, string Name, Status Statut, int DeletedFlag);
+public record AirlineDto(int Id, string Name, State State, int DeletedFlag);
 
 /// <summary>
 ///     The airline.
@@ -22,6 +21,15 @@ public record AirlineDto(int Id, string Name, Status Statut, int DeletedFlag);
 [Table("Airlines")]
 public class Airline : DeleteEntity<int>
 {
+    public Airline()
+    {
+    }
+
+    public Airline(AirlineDto dto)
+    {
+        Copy(dto);
+    }
+
     /// <summary>
     ///     Gets or sets the name.
     /// </summary>
@@ -38,7 +46,7 @@ public class Airline : DeleteEntity<int>
     [Required(ErrorMessage = "State must be given.")]
     [Column("state")]
     [JsonProperty(PropertyName = "state")]
-    public State Statut { get; set; } = State.Active;
+    public State State { get; set; } = State.Active;
 
     /// <summary>
     ///     Gets or sets the deleted flag.
@@ -46,4 +54,13 @@ public class Airline : DeleteEntity<int>
     [Column("flag")]
     [JsonProperty(PropertyName = "flag")]
     public int DeletedFlag { get; set; }
+
+    public void Copy(AirlineDto dto)
+    {
+        Id = dto.Id > 0 ? dto.Id : 0;
+
+        Name = dto.Name;
+        State = dto.State;
+        DeletedFlag = dto.DeletedFlag;
+    }
 }
