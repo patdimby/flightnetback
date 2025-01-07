@@ -1,5 +1,6 @@
 ﻿using Flight.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Flight.Flight.Infrastructure.Configurations;
 
 namespace Flight.Infrastructure.Database;
 
@@ -61,5 +62,10 @@ public class FlightContext : DbContext
     public FlightContext(DbContextOptions options) : base(options)
     {
         /* Drop it when lauch EF commands. */
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new OrderConfiguration());
     }
 }
