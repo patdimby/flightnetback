@@ -1,11 +1,13 @@
 using Flight.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Flight.Flight.Infrastructure.Configurations;
+namespace Flight.Infrastructure.Configurations;
 
 public class CountryConfiguration : IEntityTypeConfiguration<Country>
 {
     public void Configure(EntityTypeBuilder<Country> builder)
     {
-        builder.Entity<Country>().Navigation(e => e.City).AutoInclude();
+        builder.Navigation(e => e.Cities).AutoInclude();
     }
 }

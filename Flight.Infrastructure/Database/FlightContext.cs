@@ -1,6 +1,6 @@
 ﻿using Flight.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Flight.Flight.Infrastructure.Configurations;
+using Flight.Infrastructure.Configurations;
 
 namespace Flight.Infrastructure.Database;
 
@@ -66,6 +66,6 @@ public class FlightContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new OrderConfiguration());
+        modelBuilder.ApplyConfiguration(new CountryConfiguration());
     }
 }
