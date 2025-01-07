@@ -58,7 +58,6 @@ public class Airline : DeleteEntity<int>
     public void Copy(AirlineDto dto)
     {
         Id = dto.Id > 0 ? dto.Id : 0;
-
         Name = dto.Name;
         State = dto.State;
         DeletedFlag = dto.DeletedFlag;
