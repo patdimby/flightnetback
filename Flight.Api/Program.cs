@@ -48,10 +48,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.UseHsts();
     app.MapScalarApiReference(options =>
-            options//.WithTheme(ScalarTheme.Solarized)
+            options.WithTheme(ScalarTheme.Solarized)
                 .WithTitle("ASP.NET Minimal Web Api for Flight Application.")
                 .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
-        .WithCustomCss("https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css")
+        //.WithCustomCss("https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css")
     );
 }
 
