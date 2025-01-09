@@ -13,10 +13,12 @@ public enum Genre
 /// <summary>
 ///     The flight type.
 /// </summary>
-public enum Type
+public enum Confort
 {
     Business,
-    Economy
+    Economy,
+    Comfort,
+    Deluxe
 }
 
 /// <summary>

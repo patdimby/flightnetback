@@ -1,6 +1,6 @@
 ﻿using Flight.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Flight.Infrastructure.Configurations;
+using Flight.Infrastructure.EntityConfigurations;
 
 namespace Flight.Infrastructure.Database;
 

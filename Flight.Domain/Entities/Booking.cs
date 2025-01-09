@@ -13,7 +13,7 @@ public static class BookingExtensions
     }
 }
 
-public record BookingDto(int Id, Type FlightType, int FlightId, Flight Plane, Statut Statut);
+public record BookingDto(int Id, Confort FlightType, int FlightId, Flight Plane, Statut Statut);
 
 /// <summary>
 ///     The reservation.
@@ -35,7 +35,7 @@ public class Booking : DeleteEntity<int>
     /// </summary>
     [Column("flight_type")]
     [JsonProperty(PropertyName = "flight_type")]
-    public Type FlightType { get; set; } = Type.Economy;
+    public Confort FlightType { get; set; } = Confort.Economy;
 
     /// <summary>
     ///     Gets or sets the flight id.
