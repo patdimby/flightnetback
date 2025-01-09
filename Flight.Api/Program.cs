@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Flight.Application.Applications;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Scalar.AspNetCore;
+using Flight.Application.Concrete;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using Flight.Infrastructure.Auth;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Services.AddDataContext();
 
@@ -25,17 +29,29 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddRepoService();
 
+ConfigManager config = new ();
+
+var jwtTokenConfig = config.AppSetting.GetSection("jwtTokenConfig").Get<JwtTokenConfig>();
+builder.Services.AddJwtService(jwtTokenConfig);
+
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowAll",
+		builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
+});
+
 
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseHsts();
     app.MapScalarApiReference(options =>
-            options.WithTheme(ScalarTheme.Solarized)
+            options//.WithTheme(ScalarTheme.Solarized)
                 .WithTitle("ASP.NET Minimal Web Api for Flight Application.")
                 .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
-        //.WithCustomCss("Stylesheets/bootstrap-5.3.3/css/bootstrap.css")
+        .WithCustomCss("https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css")
     );
 }
 
@@ -50,5 +66,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseStaticFiles();
 
 await app.RunAsync();

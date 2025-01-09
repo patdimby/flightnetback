@@ -29,5 +29,9 @@
         <ProjectReference Include="..\Flight.Util\Flight.Util.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\" />
+    </ItemGroup>
+
 
 </Project>
