@@ -1,4 +1,5 @@
 ﻿using Flight.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Flight.Infrastructure.Database;
@@ -6,7 +7,7 @@ namespace Flight.Infrastructure.Database;
 /// <summary>
 ///     The flight context.
 /// </summary>
-public class FlightContext : DbContext
+public class FlightContext : IdentityDbContext
 {
     /// <summary>
     ///     Gets or sets the airline.
