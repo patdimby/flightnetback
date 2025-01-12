@@ -1,6 +1,7 @@
 ﻿using Flight.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Flight.Infrastructure.EntityConfigurations;
 
 namespace Flight.Infrastructure.Database;
 
@@ -62,5 +63,10 @@ public class FlightContext : IdentityDbContext
     public FlightContext(DbContextOptions options) : base(options)
     {
         /* Drop it when lauch EF commands. */
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new CountryConfiguration());
     }
 }
