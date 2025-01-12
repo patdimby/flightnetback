@@ -1,13 +1,16 @@
 ﻿using System;
 using Flight.Infrastructure.Database;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Flight.Application.Applications
 {
     public static class IdentityMiddleware
     {
-        public static void AddJwtService(){
+        public static void AddJwtService(this IServiceCollection services)
+        {
             services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -17,10 +20,10 @@ namespace Flight.Application.Applications
 {
     o.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+      /*  ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])), */
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = false,
