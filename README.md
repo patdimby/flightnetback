@@ -1,4 +1,4 @@
-<img src="banner_github.jpg" alt="GitHub Banner" width="50%" />
+<img src="banner_github.jpg" alt="GitHub Banner" width="100%" />
 
 # Hello Scalar! Bye, Swagger 👋🏼
 This .NET package Scalar.AspNetCore provides an easy way to render beautiful API references based on OpenAPI/Swagger documents.
@@ -6,7 +6,7 @@ This .NET package Scalar.AspNetCore provides an easy way to render beautiful API
 Made possible by the wonderful work of @captainsafia on building the integration and docs written for the Scalar & .NET integration. Thanks to @xC0dex for making it awesome.
 Scalar is a tool that helps us create beautiful documentation for our APIs. Unlike the default Swagger documentation, which can feel a bit outdated, Scalar offers a fresh and modern UI for API documentation. Its clean design makes it easy for developers to find the APIs they need for testing.
 
-<img src="api.PNG" alt=".NET Minimal web API" width="50%" />
+<img src="api.PNG" alt=".NET Minimal web API" width="100%" />
 
 # CLean architecture
 Clean architecture is a software design philosophy that separates the elements of a design into ring levels. An important goal of clean architecture is to provide developers with a way to organize code in such a way that it encapsulates the business logic but keeps it separate from the delivery mechanism. 
