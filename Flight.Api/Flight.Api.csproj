@@ -10,9 +10,13 @@
 
     <ItemGroup>
       <Compile Remove="Stylesheets\**" />
+      <Compile Remove="wwwroot\**" />
       <Content Remove="Stylesheets\**" />
+      <Content Remove="wwwroot\**" />
       <EmbeddedResource Remove="Stylesheets\**" />
+      <EmbeddedResource Remove="wwwroot\**" />
       <None Remove="Stylesheets\**" />
+      <None Remove="wwwroot\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -31,10 +35,6 @@
         <ProjectReference Include="..\Flight.Infrastructure\Flight.Infrastructure.csproj" />
         <ProjectReference Include="..\Flight.Util\Flight.Util.csproj" />
 
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="wwwroot\" />
     </ItemGroup>
 
 
